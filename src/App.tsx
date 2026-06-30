@@ -2,8 +2,9 @@ import React, { useState, useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
 
 const CALENDLY = "https://calendly.com/curvetechsolution/book-a-meeting";
+const WA_NO = "923316310490";
 const SITE = "https://curvetechsolution.online";
-const waLink = (msg = "") => `javascript:alert('Contact us for WhatsApp details')`;
+const waLink = (msg = "") => `https://wa.me/${WA_NO}${msg ? `?text=${encodeURIComponent(msg)}` : ""}`;
 const fmtUSD = n => `$${Number(n).toLocaleString()}`;
 
 // ── Supabase Config ───────────────────────────────────────────────
@@ -777,7 +778,7 @@ function WebCard({ pkg, color }) {
   const [tab, setTab] = useState("service");
   const [domainAddon, setDomainAddon] = useState(false);
   const basePrice = parseInt(pkg.price.replace(/[^0-9]/g, ""), 10) || 0;
-  const displayPrice = "Rs. " + (basePrice + (domainAddon ? 10000 : 0)).toLocaleString();
+  const displayPrice = "$" + (basePrice + (domainAddon ? 36 : 0)).toLocaleString();
   return (
     <div className="pkg-card" style={{ border:pkg.featured?`2px solid ${color}`:"1.5px solid #e8edf2", boxShadow:pkg.featured?`0 8px 32px ${color}20`:"0 2px 10px rgba(0,0,0,.05)" }}
       onMouseEnter={e=>{e.currentTarget.style.boxShadow=`0 14px 36px ${color}22`;}}
@@ -1500,7 +1501,7 @@ const SERVICES = [
     packages:[
       { name:"Basic Caller", tier:"Basic", price:"$65", per:"/mo", setup:"$72", setupNote:"One-Time Setup Fee", year:"~$777/year", features:["AI outbound calling setup","500 calls per month","Lead follow-up automation","Call outcome logging","Gmail summary per call","n8n workflow included"] },
       { name:"Smart Caller", tier:"Standard", featured:true, price:"$108", per:"/mo", setup:"$126", setupNote:"One-Time Setup Fee", year:"~$1,295/year", features:["Everything in Basic","1,500 calls per month","Inbound + outbound calling","Appointment booking via call","CRM / Sheets integration","Call transcript logging"] },
-      { name:"Enterprise Caller", tier:"Pro", price:"$180", per:"/mo", setup:"Rs. 55,000", setupNote:"One-Time Setup Fee", year:"~$2,158/year", features:["Everything in Standard","Unlimited calls","Multi-language support","WhatsApp + Call combined flow","A/B script testing","Monthly performance report"] },
+      { name:"Enterprise Caller", tier:"Pro", price:"$180", per:"/mo", setup:"$198", setupNote:"One-Time Setup Fee", year:"~$2,158/year", features:["Everything in Standard","Unlimited calls","Multi-language support","WhatsApp + Call combined flow","A/B script testing","Monthly performance report"] },
     ]},
   { id:"leadgen", icon:"🎯", label:"Lead Generation", tagline:"Targeted lead lists and B2B outreach", desc:"Verified leads via data scraping, LinkedIn outreach, cold email, and WhatsApp campaigns.", type:"leadgen",
     packages:[
@@ -1522,7 +1523,7 @@ function Footer() {
           🌐 Visit curvetechsolution.online →
         </a>
         <div className="footer-links">
-          <a href="javascript:void(0)" style={{ cursor:"pointer" }}>💬 Contact Us</a>
+          <a href={waLink()} target="_blank" rel="noopener noreferrer">💬 WhatsApp: 03316310490</a>
           <span>·</span>
           <a href={CALENDLY} target="_blank" rel="noopener noreferrer">📅 Book a Meeting</a>
           <span>·</span>
@@ -1549,6 +1550,7 @@ function ServiceDetail({ svc, onBack, onOther }) {
         <span style={{ fontSize:20 }}>{svc.icon}</span>
         <span className="detail-nav-title">{svc.label}</span>
         <button onClick={()=>setShowOthers(!showOthers)} style={{ background:showOthers?color:"#f1f5f9", color:showOthers?"#fff":"#475569", border:"none", borderRadius:8, padding:"7px 12px", cursor:"pointer", fontSize:12, fontWeight:600, flexShrink:0, transition:"all .2s" }}>🔍 Other</button>
+        <a href={waLink()} target="_blank" rel="noopener noreferrer" style={{ background:"#25d366", color:"#fff", borderRadius:10, padding:"8px 14px", fontWeight:700, fontSize:13, textDecoration:"none", flexShrink:0 }}>💬 WhatsApp</a>
       </div>
       {showOthers && (
         <div style={{ background:"#fff", borderBottom:"1px solid #e8edf2", padding:"12px 16px", boxShadow:"0 4px 16px rgba(0,0,0,.06)" }}>
@@ -1592,8 +1594,9 @@ function ServiceDetail({ svc, onBack, onOther }) {
         </div>
         <div style={{ background:`linear-gradient(135deg,${B.p},#fff)`, border:`1.5px solid ${B.mid}`, borderRadius:20, padding:"28px 20px", textAlign:"center", marginTop:24 }}>
           <h3 style={{ fontSize:18, fontWeight:800, color:"#0f172a", marginBottom:8 }}>Have a question or want something custom?</h3>
-          <p style={{ color:"#64748b", fontSize:14, maxWidth:420, margin:"0 auto 20px" }}>Contact us or book a free strategy call to discuss your needs.</p>
+          <p style={{ color:"#64748b", fontSize:14, maxWidth:420, margin:"0 auto 20px" }}>Message us on WhatsApp or book a free strategy call.</p>
           <div className="cta-btns">
+            <a href={waLink()} target="_blank" rel="noopener noreferrer" className="cta-btn-wa">💬 WhatsApp</a>
             <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="cta-btn-cal">📅 Book Free Meeting</a>
           </div>
         </div>
@@ -1687,7 +1690,7 @@ export default function App() {
             <div className="cta-block">
               <p>Want a custom package? Talk to us — we respond fast.</p>
               <div className="cta-btns">
-                <a href="javascript:void(0)" className="cta-btn-wa" style={{cursor:"pointer"}}>💬 Contact Us</a>
+                <a href={waLink()} target="_blank" rel="noopener noreferrer" className="cta-btn-wa">💬 WhatsApp: 03316310490 </a>
                 <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="cta-btn-cal">📅 Book Free Meeting</a>
               </div>
             </div>
@@ -1695,7 +1698,9 @@ export default function App() {
         </div>
         <Footer />
       </div>
-      {/* Floating WhatsApp button removed */}
+      <a href={waLink()} target="_blank" rel="noopener noreferrer" className="wa-float" title="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
     </>
   );
 }
