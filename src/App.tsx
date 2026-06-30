@@ -5,7 +5,7 @@ const CALENDLY = "https://calendly.com/curvetechsolution/book-a-meeting";
 const WA_NO = "923316310490";
 const SITE = "https://curvetechsolution.online";
 const waLink = (msg = "") => `https://wa.me/${WA_NO}${msg ? `?text=${encodeURIComponent(msg)}` : ""}`;
-const fmtUSD = n => `$${Number(n).toLocaleString()}`;
+const fmtUSD = n => `$${Number(n).toLocaleString(undefined,{maximumFractionDigits:2})}`;
 
 // ── Supabase Config ───────────────────────────────────────────────
 const SUPABASE_URL = "https://dbyrmttpkeftcgcdneas.supabase.co";
@@ -163,7 +163,6 @@ function GSModal({ open, onClose, name, price, serviceId = "", skipDuration = fa
   const [customDur, setCustomDur] = useState("");
   const [durStep, setDurStep] = useState(!shouldSkip);
 
-  // Reset state when modal opens/closes
   useEffect(() => {
     if (open) {
       setDurStep(!shouldSkip);
@@ -189,7 +188,6 @@ function GSModal({ open, onClose, name, price, serviceId = "", skipDuration = fa
     setLoading(true);
     setError("");
     try {
-      // Generate unique ID (timestamp-based like existing rows)
       const uniqueId = String(Date.now());
 
       const payload = {
@@ -210,8 +208,8 @@ function GSModal({ open, onClose, name, price, serviceId = "", skipDuration = fa
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRieXJtdHRwa2VmdGNnY2RuZWFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NTY1NzcsImV4cCI6MjA5NjMzMjU3N30.ipTjwyyRakLK8Ac9n7TXh-5bQp3tXlOsktcs6bE5mxI",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRieXJtdHRwa2VmdGNnY2RuZWFzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NTY1NzcsImV4cCI6MjA5NjMzMjU3N30.ipTjwyyRakLK8Ac9n7TXh-5bQp3tXlOsktcs6bE5mxI",
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`,
             "Prefer": "return=minimal",
           },
           body: JSON.stringify(payload),
@@ -277,7 +275,6 @@ function GSModal({ open, onClose, name, price, serviceId = "", skipDuration = fa
     <div style={overlayStyle} onClick={onClose}>
       <div style={boxStyle} onClick={e=>e.stopPropagation()}>
 
-        {/* ── Header ── */}
         <div style={headerStyle}>
           <button onClick={onClose} style={closeBtn}>✕</button>
           {submitted ? (
@@ -306,7 +303,6 @@ function GSModal({ open, onClose, name, price, serviceId = "", skipDuration = fa
           )}
         </div>
 
-        {/* ── Body ── */}
         <div style={bodyStyle}>
           {submitted ? (
             <div style={{ textAlign:"center", padding:"8px 0 4px" }}>
@@ -390,7 +386,6 @@ function GSModal({ open, onClose, name, price, serviceId = "", skipDuration = fa
 
           ) : (
             <div>
-              {/* Show delivery badge only if duration was selected (non-skipped services) */}
               {!shouldSkip && selectedDur && (
                 <div style={{ background:`${B.l}`, border:`1px solid ${B.mid}`, borderRadius:10, padding:"10px 14px", marginBottom:16, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
                   <div style={{ display:"flex", alignItems:"center", gap:8 }}>
@@ -520,7 +515,6 @@ function GSBtn({ color, featured, name, price, serviceId = "", description = "" 
 
 
 // ── Collapsible Feature List ──────────────────────────────────────
-// Shared desktop sync context
 const FeatureOpenCtx = React.createContext<{ open: boolean; setOpen: (v: boolean) => void } | null>(null);
 
 function FeatureList({ features = [], warnings = [], color, defaultOpen = false }) {
@@ -528,7 +522,6 @@ function FeatureList({ features = [], warnings = [], color, defaultOpen = false 
   const ctx = React.useContext(FeatureOpenCtx);
   const [localOpen, setLocalOpen] = useState(defaultOpen);
 
-  // Desktop: use shared ctx; Mobile: use local state
   const open = isDesktop && ctx ? ctx.open : localOpen;
   const setOpen = isDesktop && ctx ? ctx.setOpen : setLocalOpen;
 
@@ -560,7 +553,6 @@ function FeatureList({ features = [], warnings = [], color, defaultOpen = false 
   );
 }
 
-// Wrapper: desktop mein shared state provide karta hai, mobile mein sirf children render
 function SyncedFeatureGroup({ children, color }) {
   const [open, setOpen] = useState(false);
   const isDesktop = typeof window !== "undefined" && window.matchMedia("(min-width: 641px)").matches;
@@ -591,7 +583,7 @@ function PkgCard({ pkg, color, serviceId = "" }) {
   );
 }
 
-// ── Web Features ──────────────────────────────────────────────────
+// ── Web Features (all prices in USD) ───────────────────────────────
 const WEB_FEATURES = {
   service: [
     { key:"pages",      icon:"📄", label:"Number of Pages",        type:"counter", min:1, max:20, default:4, basePrice:3,  unit:"page",  desc:"Each additional page" },
@@ -600,34 +592,34 @@ const WEB_FEATURES = {
     { key:"chatbot",    icon:"🤖", label:"WhatsApp Chatbot",         type:"toggle",  price:9,  desc:"Automated WhatsApp reply bot" },
     { key:"queryform",  icon:"📋", label:"Query / Contact Form",     type:"toggle",  price:3,   desc:"Lead capture form on your site" },
     { key:"googlemap",  icon:"📍", label:"Google Map Embed",         type:"toggle",  price:2,   desc:"Show your location on the site" },
-    { key:"reviews",    icon:"⭐", label:"Google Reviews Section",   type:"toggle",  price:2,   desc:"Display your Google reviews" },
+    { key:"reviews",    icon:"⭐", label:"Google Reviews Section",   type:"toggle",  price:3,   desc:"Display your Google reviews" },
     { key:"booking",    icon:"📅", label:"Appointment Booking",      type:"toggle",  price:14,  desc:"Online booking / scheduling system" },
     { key:"calendar",   icon:"🗓️", label:"Booking + Calendar Sync",  type:"toggle",  price:7,  desc:"Sync bookings with Google Calendar" },
     { key:"crm",        icon:"📊", label:"Google Sheets CRM",        type:"toggle",  price:11,  desc:"Auto-log leads into Google Sheets" },
     { key:"metapixel",  icon:"🎯", label:"Meta Pixel Setup",         type:"toggle",  price:5,  desc:"Facebook/Instagram ad tracking" },
     { key:"googleindex",icon:"🔍", label:"Google Indexing",          type:"toggle",  price:4,  desc:"Submit site to Google Search" },
-    { key:"aichatbot",  icon:"🧠", label:"AI Chatbot",               type:"toggle",  price:5000,  desc:"Smart AI-powered website chatbot" },
-    { key:"productdisplay", icon:"🖼️", label:"Product Display",      type:"toggle",  price:200,   desc:"Showcase products on your website" },
+    { key:"aichatbot",  icon:"🧠", label:"AI Chatbot",               type:"toggle",  price:18,  desc:"Smart AI-powered website chatbot" },
+    { key:"productdisplay", icon:"🖼️", label:"Product Display",      type:"toggle",  price:1,   desc:"Showcase products on your website" },
     { key:"mobile",     icon:"📱", label:"Mobile Responsive",        type:"toggle",  price:0,     included:true, desc:"Works on all screen sizes" },
   ],
   ecom: [
-    { key:"pages",      icon:"📄", label:"Number of Pages",          type:"counter", min:1, max:20, default:4, basePrice:800,  unit:"page",  desc:"Each page beyond 1st" },
-    { key:"products",   icon:"🛍️", label:"Product Listings",          type:"counter", min:5, max:100, default:10, basePrice:150, unit:"product", desc:"Per product listing" },
-    { key:"categories", icon:"🗂️", label:"Product Categories",        type:"counter", min:1, max:20, default:3, basePrice:400,  unit:"cat",   desc:"Per product category" },
+    { key:"pages",      icon:"📄", label:"Number of Pages",          type:"counter", min:1, max:20, default:4, basePrice:3,  unit:"page",  desc:"Each page beyond 1st" },
+    { key:"products",   icon:"🛍️", label:"Product Listings",          type:"counter", min:5, max:100, default:10, basePrice:1, unit:"product", desc:"Per product listing" },
+    { key:"categories", icon:"🗂️", label:"Product Categories",        type:"counter", min:1, max:20, default:3, basePrice:1,  unit:"cat",   desc:"Per product category" },
     { key:"whatsapp",   icon:"💬", label:"WhatsApp Button",           type:"toggle",  price:0,     included:true, desc:"CTA button linking to WhatsApp" },
     { key:"domainhosting", icon:"🌐", label:"Domain & Hosting (1 Year)", type:"toggle", price:36, desc:"Custom domain + hosting setup, 1 year" },
     { key:"cart",       icon:"🛒", label:"Add to Cart + COD",         type:"toggle",  price:11,  desc:"Cart system with cash on delivery" },
-    { key:"payment",    icon:"💳", label:"Payment Gateway",           type:"toggle",  price:5000,  desc:"Online payments (card/bank)" },
-    { key:"checkout",   icon:"✅", label:"Checkout System",           type:"toggle",  price:2000,  desc:"Full checkout + order management" },
+    { key:"payment",    icon:"💳", label:"Payment Gateway",           type:"toggle",  price:18,  desc:"Online payments (card/bank)" },
+    { key:"checkout",   icon:"✅", label:"Checkout System",           type:"toggle",  price:7,  desc:"Full checkout + order management" },
     { key:"inventory",  icon:"📦", label:"Inventory Management",      type:"toggle",  price:11,  desc:"Track stock levels automatically" },
-    { key:"accounts",   icon:"👤", label:"Customer Accounts",         type:"toggle",  price:2500,  desc:"Login, orders, profile for customers" },
-    { key:"googlemap",  icon:"📍", label:"Google Map Embed",          type:"toggle",  price:500,   desc:"Show your store location" },
-    { key:"metapixel",  icon:"🎯", label:"Meta Pixel Setup",          type:"toggle",  price:1500,  desc:"Facebook/Instagram ad tracking" },
+    { key:"accounts",   icon:"👤", label:"Customer Accounts",         type:"toggle",  price:9,  desc:"Login, orders, profile for customers" },
+    { key:"googlemap",  icon:"📍", label:"Google Map Embed",          type:"toggle",  price:2,   desc:"Show your store location" },
+    { key:"metapixel",  icon:"🎯", label:"Meta Pixel Setup",          type:"toggle",  price:5,  desc:"Facebook/Instagram ad tracking" },
     { key:"mobile",     icon:"📱", label:"Mobile Responsive",         type:"toggle",  price:0,     included:true, desc:"Works on all screen sizes" },
   ]
 };
 
-const BASE_PRICE = { service: 5000, ecom: 7000 };
+const BASE_PRICE = { service: 18, ecom: 25 };
 
 function WebPlanChooser({ color }) {
   const [gsOpen, setGsOpen] = useState(false);
@@ -789,7 +781,6 @@ function WebCard({ pkg, color }) {
       <div style={{ fontSize:26, fontWeight:900, color, marginBottom:2 }}>{displayPrice}<span style={{ fontSize:13, fontWeight:400, color:"#94a3b8" }}>{pkg.per}</span></div>
       <div style={{ fontSize:12, color:"#ef4444", fontWeight:600, marginBottom:10 }}>{pkg.year}</div>
 
-      {/* Domain & Hosting Add-on toggle */}
       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:8, background:domainAddon?`${color}10`:"#f8fafc", border:`1.5px solid ${domainAddon?color:"#e8edf2"}`, borderRadius:10, padding:"8px 10px", marginBottom:14, transition:"all .2s" }}>
         <div>
           <div style={{ fontSize:12, fontWeight:700, color:"#0f172a" }}>🌐 Domain & Hosting (1 Yr)</div>
@@ -818,10 +809,10 @@ function WebCard({ pkg, color }) {
   );
 }
 
-// ── Video Service ─────────────────────────────────────────────────
+// ── Video Service (USD pricing, rounded to nearest $1) ─────────────
 function DurationBtn({ secs, baseSecs, basePrice, color, selected, onClick }) {
   const multiplier = Math.pow(1.5, (secs - baseSecs) / 30);
-  const price = Math.round(basePrice * multiplier / 100) * 100;
+  const price = Math.round(basePrice * multiplier);
   return (
     <button onClick={onClick} style={{ padding:"6px 12px", borderRadius:10, border:`1.5px solid ${selected?color:"#e2e8f0"}`, background:selected?`${color}15`:"#f8fafc", color:selected?color:"#64748b", fontSize:12, fontWeight:700, cursor:"pointer", transition:"all .2s", whiteSpace:"nowrap" }}>
       {secs}s — {fmtUSD(price)}
@@ -832,17 +823,17 @@ function DurationBtn({ secs, baseSecs, basePrice, color, selected, onClick }) {
 function VideoService({ color }) {
   const BASE_SECS = 30;
   const VIDEO_TYPES = [
-    { key:"ai",   label:"AI Commercial Video",     icon:"🎨", badge:"No Copyright Claim",   basePrice:6000,
+    { key:"ai",   label:"AI Commercial Video",     icon:"🎨", badge:"No Copyright Claim",   basePrice:22,
       feats:["AI-generated 30s commercial","Background music included","Smooth animations & transitions","Royalty-free characters","Text overlays & visual effects","HD quality — ready to post"] },
-    { key:"reel", label:"Reel / Short Editing",     icon:"✂️", badge:"Reels & Shorts",        basePrice:3500,
+    { key:"reel", label:"Reel / Short Editing",     icon:"✂️", badge:"Reels & Shorts",        basePrice:13,
       feats:["Professionally edited short","Your footage or sourced clips","Reels / Shorts format","Precision cuts & transitions","Captions & text overlays","Music sync included"] },
-    { key:"yt",   label:"YouTube Video",            icon:"▶️", badge:"YouTube Ready",         basePrice:5000,
+    { key:"yt",   label:"YouTube Video",            icon:"▶️", badge:"YouTube Ready",         basePrice:18,
       feats:["Full YouTube-format video","Intro & outro included","Chapter markers added","Thumbnail design included","Color grading & audio mix","SEO-optimized title/description"] },
   ];
   const [counts, setCounts] = useState<Record<string,number>>({ ai:0, reel:0, yt:0 });
   const [durations, setDurations] = useState<Record<string,number>>({ ai:30, reel:30, yt:30 });
   const [gsOpen, setGsOpen] = useState(false);
-  const getPrice = (basePrice, secs) => Math.round(basePrice * Math.pow(1.5, (secs - BASE_SECS) / 30) / 100) * 100;
+  const getPrice = (basePrice, secs) => Math.round(basePrice * Math.pow(1.5, (secs - BASE_SECS) / 30));
   const totalForType = (key) => { const vt = VIDEO_TYPES.find(v=>v.key===key); return counts[key] * getPrice(vt.basePrice, durations[key]); };
   const total = VIDEO_TYPES.reduce((s,vt) => s + totalForType(vt.key), 0);
   const totalVideos = Object.values(counts).reduce((a,b)=>a+b,0);
@@ -922,7 +913,7 @@ function VideoService({ color }) {
   );
 }
 
-// ── SMM Service ───────────────────────────────────────────────────
+// ── SMM Service (USD pricing) ───────────────────────────────────────
 const PLATS_DEF = [
   { id:"fb", label:"Facebook", icon:"📘" },
   { id:"ig", label:"Instagram", icon:"📸" },
@@ -943,30 +934,30 @@ function SMMService({ color }) {
   const [ttAds, setTtAds] = useState(0);
   const [liAds, setLiAds] = useState(0);
   const [ytAds, setYtAds] = useState(0);
-  const [fbBudget, setFbBudget] = useState(5000);
-  const [ttBudget, setTtBudget] = useState(5000);
-  const [liBudget, setLiBudget] = useState(5000);
-  const [ytBudget, setYtBudget] = useState(5000);
+  const [fbBudget, setFbBudget] = useState(18);
+  const [ttBudget, setTtBudget] = useState(18);
+  const [liBudget, setLiBudget] = useState(18);
+  const [ytBudget, setYtBudget] = useState(18);
   const [gsOpen, setGsOpen] = useState(false);
   const [gsPkg, setGsPkg] = useState(null);
 
-  const PLAT_P=1500, POST_P=700, AIR_BASE=4000, EDR_BASE=2500, FB_AD=2000, TT_AD=2500, LI_AD=3000, YT_AD=5000;
+  const PLAT_P=5, POST_P=3, AIR_BASE=14, EDR_BASE=9, FB_AD=7, TT_AD=9, LI_AD=11, YT_AD=18;
   const REEL_DURATIONS = [30, 60, 90, 120];
-  const reelPrice = (base, secs) => Math.round(base * Math.pow(1.5, (secs - 30) / 30) / 100) * 100;
+  const reelPrice = (base, secs) => Math.round(base * Math.pow(1.5, (secs - 30) / 30));
   const AIR_P = reelPrice(AIR_BASE, aiReelDur);
   const EDR_P = reelPrice(EDR_BASE, edReelDur);
   const customTotal = plats.length*PLAT_P + posts*POST_P + aiReels*AIR_P + edReels*EDR_P + fbAds*FB_AD + ttAds*TT_AD + liAds*LI_AD + ytAds*YT_AD;
 
   const fixedPkgs = [
-    { name:"Starter Presence", tier:"Starter", price:"Rs 9,999", per:"/month", featured:false,
+    { name:"Starter Presence", tier:"Starter", price:"$36", per:"/month", featured:false,
       features:["Platforms: Facebook + Instagram","6 Posts per month","1 Reel (20–30 sec)","3 Campaign optimizations","Basic page management","Captions & hashtags"],
-      warning:["Sponsored ads budget NOT included","Recommended Ads Budget: PKR 10,000 (Client Paid)"] },
-    { name:"Digital Growth", tier:"Standard", price:"Rs 19,999", per:"/month", featured:true,
+      warning:["Sponsored ads budget NOT included","Recommended Ads Budget: $36 (Client Paid)"] },
+    { name:"Digital Growth", tier:"Standard", price:"$72", per:"/month", featured:true,
       features:["Platforms: Facebook + Instagram","One Optional: LinkedIn or TikTok","12 Posts per month","2 Reels (30–45 sec)","Copywriting & caption hooks","Page management","3 Paid Campaigns (Awareness + Engagement + Retargeting)","Monthly growth report"],
-      warning:["Boosting Budget: PKR 15,000–20,000 (Client Paid)"] },
-    { name:"Brand Authority", tier:"Pro", price:"Rs 34,999", per:"/month", featured:false,
+      warning:["Boosting Budget: $54–72 (Client Paid)"] },
+    { name:"Brand Authority", tier:"Pro", price:"$126", per:"/month", featured:false,
       features:["Platforms: Facebook, Instagram, LinkedIn, YouTube","25 Custom Posts per month","4 Reels (30–60 sec with overlays)","Content calendar","Competitor analysis","Bi-weekly growth consultation","4 Campaigns (Includes Conversion + Retargeting)"],
-      warning:["Boosting Budget: PKR 30,000–50,000 (Client Paid)"] },
+      warning:["Boosting Budget: $108–180 (Client Paid)"] },
   ];
 
   const togPlat = id => setPlats(p => p.includes(id) ? p.length>1 ? p.filter(x=>x!==id) : p : [...p,id]);
@@ -975,9 +966,7 @@ function SMMService({ color }) {
   return (
     <div style={{ paddingBottom: showStickySmm ? 80 : 0 }}>
       <StickyBar price={fmtUSD(customTotal)+"/mo"} onClick={()=>{ setGsPkg(null); setGsOpen(true); }} color={color} visible={showStickySmm} />
-      {/* Fixed packages GSModal — skipDuration=true kyunki monthly billing fixed hai */}
       <GSModal open={gsOpen && !!gsPkg} onClose={()=>{ setGsOpen(false); setGsPkg(null); }} name={gsPkg?.name} price={gsPkg?.price} serviceId="smm" skipDuration={true} description={gsPkg?.features ? gsPkg.features.join("\n") : ""} />
-      {/* Custom builder GSModal — skipDuration=true kyunki monthly custom bhi fixed cycle hai */}
       <GSModal open={gsOpen && !gsPkg} onClose={()=>setGsOpen(false)} name="Custom Social Media Package" price={fmtUSD(customTotal)+"/mo"} serviceId="smm" skipDuration={true} description={`Platforms: ${plats.join(", ").toUpperCase()}\n${posts} Posts per month${aiReels>0?`\n${aiReels} AI Reels (${aiReelDur}s)`:""}${edReels>0?`\n${edReels} Edited Reels (${edReelDur}s)`:""}${fbAds>0?`\n${fbAds} Facebook Ad Campaign(s)`:""}${ttAds>0?`\n${ttAds} TikTok Ad Campaign(s)`:""}${liAds>0?`\n${liAds} LinkedIn Ad Campaign(s)`:""}${ytAds>0?`\n${ytAds} YouTube Ad Campaign(s)`:""}`} />
 
       <div style={{ display:"flex", background:"#f1f5f9", borderRadius:12, padding:4, marginBottom:28, gap:4, maxWidth:360, margin:"0 auto 28px" }}>
@@ -1091,7 +1080,7 @@ function SMMService({ color }) {
                       <span style={{ fontSize:13, fontWeight:600, color:"#0f172a" }}>{b.label}</span>
                       <span style={{ fontSize:14, fontWeight:800, color }}>{fmtUSD(b.v)}</span>
                     </div>
-                    <input type="range" min={2000} max={500000} step={1000} value={b.v} onChange={e=>b.set(Number(e.target.value))}
+                    <input type="range" min={7} max={1798} step={5} value={b.v} onChange={e=>b.set(Number(e.target.value))}
                       style={{ width:"100%", accentColor:color, height:6, borderRadius:3, cursor:"pointer" }} />
                     <div style={{ display:"flex", justifyContent:"space-between", fontSize:10, color:"#94a3b8", marginTop:4 }}>
                       <span>$7</span><span>$1,798</span>
@@ -1133,7 +1122,7 @@ function SMMService({ color }) {
   );
 }
 
-// ── Lead Gen Service ──────────────────────────────────────────────
+// ── Lead Gen Service (USD pricing) ─────────────────────────────────
 function LeadGenService({ color }) {
   const [mode, setMode] = useState("packages");
   const [gsOpen, setGsOpen] = useState(false);
@@ -1146,7 +1135,7 @@ function LeadGenService({ color }) {
   const [nurturing, setNurturing] = useState(false);
   const [dedicatedStrat, setDedicatedStrat] = useState(false);
 
-  const LEAD_P=180, EMAIL_P=5000, WA_P=6000, LI_P=7000, SCORE_P=3000, NURTURE_P=5000, STRAT_P=8000;
+  const LEAD_P=0.72, EMAIL_P=18, WA_P=22, LI_P=25, SCORE_P=11, NURTURE_P=18, STRAT_P=29;
   const customTotal = leads*LEAD_P + (emailSeq?EMAIL_P:0) + (waOutreach?WA_P:0) + (linkedinCamp?LI_P:0) + (leadScore?SCORE_P:0) + (nurturing?NURTURE_P:0) + (dedicatedStrat?STRAT_P:0);
 
   const fixedPkgs = [
@@ -1168,9 +1157,7 @@ function LeadGenService({ color }) {
   return (
     <div style={{ paddingBottom: showStickyLg ? 80 : 0 }}>
       <StickyBar price={fmtUSD(customTotal)+"/mo"} onClick={()=>{ setGsPkg(null); setGsOpen(true); }} color={color} visible={showStickyLg} />
-      {/* Fixed packages — skipDuration=true */}
       <GSModal open={gsOpen && !!gsPkg} onClose={()=>{ setGsOpen(false); setGsPkg(null); }} name={gsPkg?.name} price={gsPkg?.price} serviceId="leadgen" skipDuration={true} description={gsPkg?.features ? gsPkg.features.join("\n") : ""} />
-      {/* Custom builder — skipDuration=true */}
       <GSModal open={gsOpen && !gsPkg} onClose={()=>setGsOpen(false)} name="Custom Lead Gen Plan" price={fmtUSD(customTotal)+"/mo"} serviceId="leadgen" skipDuration={true} description={[`${leads} verified leads/month`, ...addons.filter(a=>a.v).map(a=>a.label.replace(/^[^\s]+\s/,""))].join("\n")} />
 
       <div style={{ display:"flex", background:"#f1f5f9", borderRadius:12, padding:4, marginBottom:28, gap:4, maxWidth:360, margin:"0 auto 28px" }}>
@@ -1262,7 +1249,7 @@ function LeadGenService({ color }) {
   );
 }
 
-// ── Combo Builder ─────────────────────────────────────────────────
+// ── Combo Builder (USD pricing) ──────────────────────────────────────
 const COMBO_SERVICES = [
   { id:"chatbot",   icon:"🤖", label:"Chatbot Automation",      tiers:[{ name:"Basic",    price:43 },{ name:"Standard", price:79 },{ name:"Pro",      price:126 }] },
   { id:"webdev",    icon:"🌐", label:"Website Development",      tiers:[{ name:"Starter",  price:36 },{ name:"Standard", price:101 },{ name:"Premium",  price:187 }] },
@@ -1323,14 +1310,12 @@ function ComboBuilder({ color }) {
   return (
     <div style={{ paddingBottom: showStickyCombo ? 80 : 0 }}>
       <StickyBar price={total?fmtUSD(total)+"/mo":""} onClick={()=>{ setGsPkg(null); setGsOpen(true); }} color={color} visible={showStickyCombo} />
-      {/* Fixed combo packages — skipDuration=true */}
       <GSModal open={gsOpen && !!gsPkg} onClose={()=>{ setGsOpen(false); setGsPkg(null); }}
         name={gsPkg?.name}
         price={gsPkg?.price+"/mo"}
         serviceId="growth"
         skipDuration={true}
         description={gsPkg?.features ? gsPkg.features.join("\n") : ""} />
-      {/* Custom combo builder — skipDuration=true */}
       <GSModal open={gsOpen && !gsPkg} onClose={()=>setGsOpen(false)}
         name={`Custom Combo: ${comboSummary || "No services selected"}`}
         price={total ? fmtUSD(total)+"/mo" : ""}
@@ -1338,14 +1323,12 @@ function ComboBuilder({ color }) {
         skipDuration={true}
         description={selectedIds.map(id => { const svc = COMBO_SERVICES.find(s => s.id === id); return `${svc.label} — ${svc.tiers[selected[id]].name}`; }).join("\n")} />
 
-      {/* Tab Switcher */}
       <div style={{ display:"flex", background:"#f1f5f9", borderRadius:12, padding:4, marginBottom:28, gap:4, maxWidth:360, margin:"0 auto 28px" }}>
         {[{k:"packages",l:"📦 Packages"},{k:"custom",l:"🛠 Build Your Own"}].map(t=>(
           <button key={t.k} onClick={()=>setMode(t.k)} style={{ flex:1, padding:"9px 0", borderRadius:9, border:"none", cursor:"pointer", fontSize:13, fontWeight:700, background:mode===t.k?color:"transparent", color:mode===t.k?"#fff":"#64748b", transition:"all .2s" }}>{t.l}</button>
         ))}
       </div>
 
-      {/* ── Packages Tab ── */}
       {mode === "packages" && (
         <SyncedFeatureGroup color={color}>
         <div className="pkg-grid">
@@ -1374,7 +1357,6 @@ function ComboBuilder({ color }) {
         </SyncedFeatureGroup>
       )}
 
-      {/* ── Build Your Own Tab ── */}
       {mode === "custom" && (
         <div>
           <div style={{ textAlign:"center", marginBottom:24 }}>
@@ -1523,7 +1505,7 @@ function Footer() {
           🌐 Visit curvetechsolution.online →
         </a>
         <div className="footer-links">
-          <a href={waLink()} target="_blank" rel="noopener noreferrer">💬 WhatsApp: 03316310490</a>
+          <a href={waLink()} target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
           <span>·</span>
           <a href={CALENDLY} target="_blank" rel="noopener noreferrer">📅 Book a Meeting</a>
           <span>·</span>
@@ -1541,7 +1523,6 @@ function ServiceDetail({ svc, onBack, onOther }) {
   const color = svcColor(svc.id);
   const others = SERVICES.filter(s => s.id !== svc.id);
   useEffect(() => { setTimeout(() => setVis(true), 40); }, []);
-  // Hash is managed by navigateTo via pushState
 
   return (
     <div style={{ minHeight:"100vh", background:"#f8fafc", display:"flex", flexDirection:"column" }}>
@@ -1690,7 +1671,7 @@ export default function App() {
             <div className="cta-block">
               <p>Want a custom package? Talk to us — we respond fast.</p>
               <div className="cta-btns">
-                <a href={waLink()} target="_blank" rel="noopener noreferrer" className="cta-btn-wa">💬 WhatsApp: 03316310490 </a>
+                <a href={waLink()} target="_blank" rel="noopener noreferrer" className="cta-btn-wa">💬 WhatsApp</a>
                 <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="cta-btn-cal">📅 Book Free Meeting</a>
               </div>
             </div>
