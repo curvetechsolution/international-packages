@@ -610,40 +610,40 @@ function PkgCard({ pkg, color, serviceId = "" }) {
 // ── Web Features (all prices in USD) ───────────────────────────────
 const WEB_FEATURES = {
   service: [
-    { key:"pages",      icon:"📄", label:"Number of Pages",        type:"counter", min:1, max:20, default:4, basePrice:3,  unit:"page",  desc:"Each additional page" },
+    { key:"pages",      icon:"📄", label:"Number of Pages",        type:"counter", min:1, max:20, default:4, basePrice:4,  unit:"page",  desc:"Each additional page" },
     { key:"whatsapp",   icon:"💬", label:"WhatsApp Button",         type:"toggle",  price:0,     included:true, desc:"CTA button linking to WhatsApp" },
-    { key:"domainhosting", icon:"🌐", label:"Domain & Hosting (1 Year)", type:"toggle", price:36, desc:"Custom domain + hosting setup, 1 year" },
-    { key:"chatbot",    icon:"🤖", label:"WhatsApp Chatbot",         type:"toggle",  price:9,  desc:"Automated WhatsApp reply bot" },
-    { key:"queryform",  icon:"📋", label:"Query / Contact Form",     type:"toggle",  price:3,   desc:"Lead capture form on your site" },
-    { key:"googlemap",  icon:"📍", label:"Google Map Embed",         type:"toggle",  price:2,   desc:"Show your location on the site" },
-    { key:"reviews",    icon:"⭐", label:"Google Reviews Section",   type:"toggle",  price:3,   desc:"Display your Google reviews" },
-    { key:"booking",    icon:"📅", label:"Appointment Booking",      type:"toggle",  price:14,  desc:"Online booking / scheduling system" },
-    { key:"calendar",   icon:"🗓️", label:"Booking + Calendar Sync",  type:"toggle",  price:7,  desc:"Sync bookings with Google Calendar" },
-    { key:"crm",        icon:"📊", label:"Google Sheets CRM",        type:"toggle",  price:11,  desc:"Auto-log leads into Google Sheets" },
-    { key:"metapixel",  icon:"🎯", label:"Meta Pixel Setup",         type:"toggle",  price:5,  desc:"Facebook/Instagram ad tracking" },
-    { key:"googleindex",icon:"🔍", label:"Google Indexing",          type:"toggle",  price:4,  desc:"Submit site to Google Search" },
-    { key:"aichatbot",  icon:"🧠", label:"AI Chatbot",               type:"toggle",  price:18,  desc:"Smart AI-powered website chatbot" },
-    { key:"productdisplay", icon:"🖼️", label:"Product Display",      type:"toggle",  price:1,   desc:"Showcase products on your website" },
+    { key:"domainhosting", icon:"🌐", label:"Domain & Hosting (1 Year)", type:"toggle", price:49, desc:"Custom domain + hosting setup, 1 year" },
+    { key:"chatbot",    icon:"🤖", label:"WhatsApp Chatbot",         type:"toggle",  price:13,  desc:"Automated WhatsApp reply bot" },
+    { key:"queryform",  icon:"📋", label:"Query / Contact Form",     type:"toggle",  price:4,   desc:"Lead capture form on your site" },
+    { key:"googlemap",  icon:"📍", label:"Google Map Embed",         type:"toggle",  price:3,   desc:"Show your location on the site" },
+    { key:"reviews",    icon:"⭐", label:"Google Reviews Section",   type:"toggle",  price:4,   desc:"Display your Google reviews" },
+    { key:"booking",    icon:"📅", label:"Appointment Booking",      type:"toggle",  price:20,  desc:"Online booking / scheduling system" },
+    { key:"calendar",   icon:"🗓️", label:"Booking + Calendar Sync",  type:"toggle",  price:10,  desc:"Sync bookings with Google Calendar" },
+    { key:"crm",        icon:"📊", label:"Google Sheets CRM",        type:"toggle",  price:15,  desc:"Auto-log leads into Google Sheets" },
+    { key:"metapixel",  icon:"🎯", label:"Meta Pixel Setup",         type:"toggle",  price:8,  desc:"Facebook/Instagram ad tracking" },
+    { key:"googleindex",icon:"🔍", label:"Google Indexing",          type:"toggle",  price:5,  desc:"Submit site to Google Search" },
+    { key:"aichatbot",  icon:"🧠", label:"AI Chatbot",               type:"toggle",  price:25,  desc:"Smart AI-powered website chatbot" },
+    { key:"productdisplay", icon:"🖼️", label:"Product Display",      type:"toggle",  price:2,   desc:"Showcase products on your website" },
     { key:"mobile",     icon:"📱", label:"Mobile Responsive",        type:"toggle",  price:0,     included:true, desc:"Works on all screen sizes" },
   ],
   ecom: [
-    { key:"pages",      icon:"📄", label:"Number of Pages",          type:"counter", min:1, max:20, default:4, basePrice:3,  unit:"page",  desc:"Each page beyond 1st" },
+    { key:"pages",      icon:"📄", label:"Number of Pages",          type:"counter", min:1, max:20, default:4, basePrice:4,  unit:"page",  desc:"Each page beyond 1st" },
     { key:"products",   icon:"🛍️", label:"Product Listings",          type:"counter", min:5, max:100, default:10, basePrice:1, unit:"product", desc:"Per product listing" },
-    { key:"categories", icon:"🗂️", label:"Product Categories",        type:"counter", min:1, max:20, default:3, basePrice:1,  unit:"cat",   desc:"Per product category" },
+    { key:"categories", icon:"🗂️", label:"Product Categories",        type:"counter", min:1, max:20, default:3, basePrice:2,  unit:"cat",   desc:"Per product category" },
     { key:"whatsapp",   icon:"💬", label:"WhatsApp Button",           type:"toggle",  price:0,     included:true, desc:"CTA button linking to WhatsApp" },
-    { key:"domainhosting", icon:"🌐", label:"Domain & Hosting (1 Year)", type:"toggle", price:36, desc:"Custom domain + hosting setup, 1 year" },
-    { key:"cart",       icon:"🛒", label:"Add to Cart + COD",         type:"toggle",  price:11,  desc:"Cart system with cash on delivery" },
-    { key:"payment",    icon:"💳", label:"Payment Gateway",           type:"toggle",  price:18,  desc:"Online payments (card/bank)" },
-    { key:"checkout",   icon:"✅", label:"Checkout System",           type:"toggle",  price:7,  desc:"Full checkout + order management" },
-    { key:"inventory",  icon:"📦", label:"Inventory Management",      type:"toggle",  price:11,  desc:"Track stock levels automatically" },
-    { key:"accounts",   icon:"👤", label:"Customer Accounts",         type:"toggle",  price:9,  desc:"Login, orders, profile for customers" },
-    { key:"googlemap",  icon:"📍", label:"Google Map Embed",          type:"toggle",  price:2,   desc:"Show your store location" },
-    { key:"metapixel",  icon:"🎯", label:"Meta Pixel Setup",          type:"toggle",  price:5,  desc:"Facebook/Instagram ad tracking" },
+    { key:"domainhosting", icon:"🌐", label:"Domain & Hosting (1 Year)", type:"toggle", price:49, desc:"Custom domain + hosting setup, 1 year" },
+    { key:"cart",       icon:"🛒", label:"Add to Cart + COD",         type:"toggle",  price:15,  desc:"Cart system with cash on delivery" },
+    { key:"payment",    icon:"💳", label:"Payment Gateway",           type:"toggle",  price:25,  desc:"Online payments (card/bank)" },
+    { key:"checkout",   icon:"✅", label:"Checkout System",           type:"toggle",  price:10,  desc:"Full checkout + order management" },
+    { key:"inventory",  icon:"📦", label:"Inventory Management",      type:"toggle",  price:15,  desc:"Track stock levels automatically" },
+    { key:"accounts",   icon:"👤", label:"Customer Accounts",         type:"toggle",  price:13,  desc:"Login, orders, profile for customers" },
+    { key:"googlemap",  icon:"📍", label:"Google Map Embed",          type:"toggle",  price:3,   desc:"Show your store location" },
+    { key:"metapixel",  icon:"🎯", label:"Meta Pixel Setup",          type:"toggle",  price:8,  desc:"Facebook/Instagram ad tracking" },
     { key:"mobile",     icon:"📱", label:"Mobile Responsive",         type:"toggle",  price:0,     included:true, desc:"Works on all screen sizes" },
   ]
 };
 
-const BASE_PRICE = { service: 18, ecom: 25 };
+const BASE_PRICE = { service: 25, ecom: 35 };
 
 function WebPlanChooser({ color }) {
   const [gsOpen, setGsOpen] = useState(false);
@@ -730,7 +730,7 @@ function WebPlanChooser({ color }) {
         </div>
         <div style={{ background:`linear-gradient(135deg,${color}10,${color}04)`, border:`2px solid ${color}30`, borderRadius:18, padding:"24px 28px" }}>
           <div style={{ fontSize:11, fontWeight:700, color, textTransform:"uppercase", letterSpacing:".08em", marginBottom:4 }}>Your Custom Plan</div>
-          <div style={{ fontSize:11, color:"#ef4444", fontWeight:600, marginBottom:16 }}>❌ Domain & Hosting NOT included by default — toggle add-on above (+$36)</div>
+          <div style={{ fontSize:11, color:"#ef4444", fontWeight:600, marginBottom:16 }}>❌ Domain & Hosting NOT included by default — toggle add-on above (+$49)</div>
           <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))", gap:"6px 20px", marginBottom:18, minHeight:36 }}>
             {picked.length === 0 && <div style={{ color:"#94a3b8", fontSize:13 }}>No features selected yet</div>}
             {picked.map(f => (
@@ -794,7 +794,7 @@ function WebCard({ pkg, color }) {
   const [tab, setTab] = useState("service");
   const [domainAddon, setDomainAddon] = useState(false);
   const basePrice = parseInt(pkg.price.replace(/[^0-9]/g, ""), 10) || 0;
-  const displayPrice = "$" + (basePrice + (domainAddon ? 36 : 0)).toLocaleString();
+  const displayPrice = "$" + (basePrice + (domainAddon ? 49 : 0)).toLocaleString();
   return (
     <div className="pkg-card" style={{ border:pkg.featured?`2px solid ${color}`:"1.5px solid #e8edf2", boxShadow:pkg.featured?`0 8px 32px ${color}20`:"0 2px 10px rgba(0,0,0,.05)" }}
       onMouseEnter={e=>{e.currentTarget.style.boxShadow=`0 14px 36px ${color}22`;}}
@@ -808,7 +808,7 @@ function WebCard({ pkg, color }) {
       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", gap:8, background:domainAddon?`${color}10`:"#f8fafc", border:`1.5px solid ${domainAddon?color:"#e8edf2"}`, borderRadius:10, padding:"8px 10px", marginBottom:14, transition:"all .2s" }}>
         <div>
           <div style={{ fontSize:12, fontWeight:700, color:"#0f172a" }}>🌐 Domain & Hosting (1 Yr)</div>
-          <div style={{ fontSize:11, color:"#94a3b8" }}>Optional add-on: +$36</div>
+          <div style={{ fontSize:11, color:"#94a3b8" }}>Optional add-on: +$49</div>
         </div>
         <button onClick={()=>setDomainAddon(d=>!d)} style={{ width:40, height:22, borderRadius:11, border:"none", cursor:"pointer", background:domainAddon?color:"#cbd5e1", transition:"all .2s", position:"relative", flexShrink:0 }}>
           <span style={{ position:"absolute", top:2, left:domainAddon?20:2, width:18, height:18, borderRadius:9, background:"#fff", transition:"all .2s", boxShadow:"0 1px 4px rgba(0,0,0,.2)" }} />
@@ -847,11 +847,11 @@ function DurationBtn({ secs, baseSecs, basePrice, color, selected, onClick }) {
 function VideoService({ color }) {
   const BASE_SECS = 30;
   const VIDEO_TYPES = [
-    { key:"ai",   label:"AI Commercial Video",     icon:"🎨", badge:"No Copyright Claim",   basePrice:22,
+    { key:"ai",   label:"AI Commercial Video",     icon:"🎨", badge:"No Copyright Claim",   basePrice:29,
       feats:["AI-generated 30s commercial","Background music included","Smooth animations & transitions","Royalty-free characters","Text overlays & visual effects","HD quality — ready to post"] },
-    { key:"reel", label:"Reel / Short Editing",     icon:"✂️", badge:"Reels & Shorts",        basePrice:13,
+    { key:"reel", label:"Reel / Short Editing",     icon:"✂️", badge:"Reels & Shorts",        basePrice:18,
       feats:["Professionally edited short","Your footage or sourced clips","Reels / Shorts format","Precision cuts & transitions","Captions & text overlays","Music sync included"] },
-    { key:"yt",   label:"YouTube Video",            icon:"▶️", badge:"YouTube Ready",         basePrice:18,
+    { key:"yt",   label:"YouTube Video",            icon:"▶️", badge:"YouTube Ready",         basePrice:25,
       feats:["Full YouTube-format video","Intro & outro included","Chapter markers added","Thumbnail design included","Color grading & audio mix","SEO-optimized title/description"] },
   ];
   const [counts, setCounts] = useState<Record<string,number>>({ ai:0, reel:0, yt:0 });
@@ -965,7 +965,7 @@ function SMMService({ color }) {
   const [gsOpen, setGsOpen] = useState(false);
   const [gsPkg, setGsPkg] = useState(null);
 
-  const PLAT_P=5, POST_P=3, AIR_BASE=14, EDR_BASE=9, FB_AD=7, TT_AD=9, LI_AD=11, YT_AD=18;
+  const PLAT_P=8, POST_P=4, AIR_BASE=20, EDR_BASE=13, FB_AD=10, TT_AD=13, LI_AD=15, YT_AD=25;
   const REEL_DURATIONS = [30, 60, 90, 120];
   const reelPrice = (base, secs) => Math.round(base * Math.pow(1.5, (secs - 30) / 30));
   const AIR_P = reelPrice(AIR_BASE, aiReelDur);
@@ -973,13 +973,13 @@ function SMMService({ color }) {
   const customTotal = plats.length*PLAT_P + posts*POST_P + aiReels*AIR_P + edReels*EDR_P + fbAds*FB_AD + ttAds*TT_AD + liAds*LI_AD + ytAds*YT_AD;
 
   const fixedPkgs = [
-    { name:"Starter Presence", tier:"Starter", price:"$36", per:"/month", featured:false,
+    { name:"Starter Presence", tier:"Starter", price:"$49", per:"/month", featured:false,
       features:["Platforms: Facebook + Instagram","6 Posts per month","1 Reel (20–30 sec)","3 Campaign optimizations","Basic page management","Captions & hashtags"],
       warning:["Sponsored ads budget NOT included","Recommended Ads Budget: $36 (Client Paid)"] },
-    { name:"Digital Growth", tier:"Standard", price:"$72", per:"/month", featured:true,
+    { name:"Digital Growth", tier:"Standard", price:"$99", per:"/month", featured:true,
       features:["Platforms: Facebook + Instagram","One Optional: LinkedIn or TikTok","12 Posts per month","2 Reels (30–45 sec)","Copywriting & caption hooks","Page management","3 Paid Campaigns (Awareness + Engagement + Retargeting)","Monthly growth report"],
       warning:["Boosting Budget: $54–72 (Client Paid)"] },
-    { name:"Brand Authority", tier:"Pro", price:"$126", per:"/month", featured:false,
+    { name:"Brand Authority", tier:"Pro", price:"$179", per:"/month", featured:false,
       features:["Platforms: Facebook, Instagram, LinkedIn, YouTube","25 Custom Posts per month","4 Reels (30–60 sec with overlays)","Content calendar","Competitor analysis","Bi-weekly growth consultation","4 Campaigns (Includes Conversion + Retargeting)"],
       warning:["Boosting Budget: $108–180 (Client Paid)"] },
   ];
@@ -1159,13 +1159,13 @@ function LeadGenService({ color }) {
   const [nurturing, setNurturing] = useState(false);
   const [dedicatedStrat, setDedicatedStrat] = useState(false);
 
-  const LEAD_P=0.72, EMAIL_P=18, WA_P=22, LI_P=25, SCORE_P=11, NURTURE_P=18, STRAT_P=29;
+  const LEAD_P=1, EMAIL_P=25, WA_P=30, LI_P=35, SCORE_P=15, NURTURE_P=25, STRAT_P=40;
   const customTotal = leads*LEAD_P + (emailSeq?EMAIL_P:0) + (waOutreach?WA_P:0) + (linkedinCamp?LI_P:0) + (leadScore?SCORE_P:0) + (nurturing?NURTURE_P:0) + (dedicatedStrat?STRAT_P:0);
 
   const fixedPkgs = [
-    { name:"Starter Leads", tier:"Basic", price:"$72", per:"/mo", year:"~$863/year", featured:false, features:["100 verified leads/month","Target by industry & location","Name, email, phone included","Google Sheet delivery","Basic email outreach (50/month)","Monthly lead report"], warning:[] },
-    { name:"Growth Leads", tier:"Standard", price:"$126", per:"/mo", year:"~$1,511/year", featured:true, features:["300 verified leads/month","Cold email sequence (3-step)","WhatsApp outreach automation","LinkedIn connection campaign","Lead scoring & prioritization","Monthly conversion report"], warning:[] },
-    { name:"Enterprise Leads", tier:"Pro", price:"$216", per:"/mo", year:"~$2,590/year", featured:false, features:["700+ verified leads/month","Multi-channel outreach","WhatsApp + LinkedIn + Cold call","Lead nurturing automation","A/B tested messaging","Dedicated lead strategist"], warning:[] },
+    { name:"Starter Leads", tier:"Basic", price:"$99", per:"/mo", year:"~$1,188/year", featured:false, features:["100 verified leads/month","Target by industry & location","Name, email, phone included","Google Sheet delivery","Basic email outreach (50/month)","Monthly lead report"], warning:[] },
+    { name:"Growth Leads", tier:"Standard", price:"$179", per:"/mo", year:"~$2,148/year", featured:true, features:["300 verified leads/month","Cold email sequence (3-step)","WhatsApp outreach automation","LinkedIn connection campaign","Lead scoring & prioritization","Monthly conversion report"], warning:[] },
+    { name:"Enterprise Leads", tier:"Pro", price:"$299", per:"/mo", year:"~$3,588/year", featured:false, features:["700+ verified leads/month","Multi-channel outreach","WhatsApp + LinkedIn + Cold call","Lead nurturing automation","A/B tested messaging","Dedicated lead strategist"], warning:[] },
   ];
 
   const addons = [
@@ -1275,29 +1275,29 @@ function LeadGenService({ color }) {
 
 // ── Combo Builder (USD pricing) ──────────────────────────────────────
 const COMBO_SERVICES = [
-  { id:"chatbot",   icon:"🤖", label:"Chatbot Automation",      tiers:[{ name:"Basic",    price:43 },{ name:"Standard", price:79 },{ name:"Pro",      price:126 }] },
-  { id:"webdev",    icon:"🌐", label:"Website Development",      tiers:[{ name:"Starter",  price:36 },{ name:"Standard", price:101 },{ name:"Premium",  price:187 }] },
-  { id:"smm",       icon:"📱", label:"Social Media Marketing",   tiers:[{ name:"Starter",  price:36  },{ name:"Standard", price:72 },{ name:"Pro",      price:126 }] },
-  { id:"seo",       icon:"🔍", label:"SEO",                       tiers:[{ name:"Local",    price:54 },{ name:"Growth",   price:101 },{ name:"Authority",price:180 }] },
-  { id:"googleads", icon:"📢", label:"Google Ads",               tiers:[{ name:"Launch",   price:54 },{ name:"Scale",    price:90 },{ name:"Full Funnel",price:144}] },
-  { id:"calling",   icon:"📞", label:"Calling Agent",            tiers:[{ name:"Basic",    price:65 },{ name:"Standard", price:108 },{ name:"Enterprise",price:180}] },
-  { id:"leadgen",   icon:"🎯", label:"Lead Generation",          tiers:[{ name:"Starter",  price:72 },{ name:"Growth",   price:126 },{ name:"Enterprise",price:216}] },
-  { id:"video",     icon:"🎬", label:"AI Video Creation",        tiers:[{ name:"3 Videos", price:43 },{ name:"6 Videos", price:76 },{ name:"10 Videos", price:115}] },
+  { id:"chatbot",   icon:"🤖", label:"Chatbot Automation",      tiers:[{ name:"Basic",    price:59 },{ name:"Standard", price:109 },{ name:"Pro",      price:179 }] },
+  { id:"webdev",    icon:"🌐", label:"Website Development",      tiers:[{ name:"Starter",  price:49 },{ name:"Standard", price:149 },{ name:"Premium",  price:259 }] },
+  { id:"smm",       icon:"📱", label:"Social Media Marketing",   tiers:[{ name:"Starter",  price:49  },{ name:"Standard", price:99 },{ name:"Pro",      price:179 }] },
+  { id:"seo",       icon:"🔍", label:"SEO",                       tiers:[{ name:"Local",    price:75 },{ name:"Growth",   price:139 },{ name:"Authority",price:249 }] },
+  { id:"googleads", icon:"📢", label:"Google Ads",               tiers:[{ name:"Launch",   price:79 },{ name:"Scale",    price:125 },{ name:"Full Funnel",price:199}] },
+  { id:"calling",   icon:"📞", label:"Calling Agent",            tiers:[{ name:"Basic",    price:89 },{ name:"Standard", price:149 },{ name:"Enterprise",price:249}] },
+  { id:"leadgen",   icon:"🎯", label:"Lead Generation",          tiers:[{ name:"Starter",  price:99 },{ name:"Growth",   price:179 },{ name:"Enterprise",price:299}] },
+  { id:"video",     icon:"🎬", label:"AI Video Creation",        tiers:[{ name:"3 Videos", price:59 },{ name:"6 Videos", price:105 },{ name:"10 Videos", price:159}] },
 ];
 
 const COMBO_DISCOUNTS = [{ min:2, max:2, pct:15, label:"2 services — 15% OFF" }, { min:3, max:99, pct:25, label:"3+ services — 25% OFF" }];
 
 const FIXED_COMBOS = [
-  { name:"Starter Combo", tier:"Basic", price:"$162", per:"/mo", featured:false, note:"Save 20% vs individual",
-    year:"~$1,942/year",
+  { name:"Starter Combo", tier:"Basic", price:"$225", per:"/mo", featured:false, note:"Save 20% vs individual",
+    year:"~$2,700/year",
     features:["🌐 Website — Starter (5 pages)","📱 Social Media — Starter (FB + IG, 6 posts)","🔍 SEO — Local (10 keywords)","🤖 Chatbot — Basic plan","Monthly performance report"],
     warning:[] },
-  { name:"Business Combo", tier:"Standard", price:"$288", per:"/mo", featured:true, note:"Save 25% vs individual",
-    year:"~$3,451/year",
+  { name:"Business Combo", tier:"Standard", price:"$399", per:"/mo", featured:true, note:"Save 25% vs individual",
+    year:"~$4,788/year",
     features:["🌐 Website — Standard (10 pages)","📱 Social Media — Standard (2 platforms, 12 posts)","🔍 SEO — Growth (25 keywords)","📢 Google Ads — Scale","🤖 Chatbot — Standard plan","Bi-weekly strategy call"],
     warning:[] },
-  { name:"Ultimate Combo", tier:"Pro", price:"$468", per:"/mo", featured:false, note:"Save 30% vs individual",
-    year:"~$5,612/year",
+  { name:"Ultimate Combo", tier:"Pro", price:"$649", per:"/mo", featured:false, note:"Save 30% vs individual",
+    year:"~$7,788/year",
     features:["🌐 Website — Premium (15 pages)","📱 Social Media — Pro (3 platforms, 25 posts)","🔍 SEO — Authority (50+ keywords)","📢 Google Ads — Full Funnel","🤖 Chatbot — Growth Suite","🎯 Lead Gen — Growth plan","Dedicated account manager"],
     warning:[] },
 ];
@@ -1478,42 +1478,42 @@ const SERVICES = [
     desc:"Turn every WhatsApp message into a qualified lead automatically. Built on n8n + GPT-4o. Handles qualification, hiring, follow-ups, and CRM logging.",
     type:"packages",
     packages:[
-      { name:"Lead Magnet", tier:"Basic", price:"$43", per:"/mo", setup:"$79", setupNote:"One-Time Setup Fee", year:"~$518/year", features:["WhatsApp lead qualification bot","Pakistan vs international detection","Meta developer account setup","VPS server included","2 auto follow-ups (4h + 22h)","Google Sheets lead logging","Gmail notification per lead","1,000 conversations / month","Fallback + escalation logic"] },
-      { name:"Smart Assistant", tier:"Standard", featured:true, price:"$79", per:"/mo", setup:"$129", setupNote:"One-Time Setup Fee", year:"~$949/year", features:["Everything in Basic","Hiring flow (6 role-specific forms)","Voice note transcription (Whisper AI)","2-hour hiring follow-up automation","5,000 conversations / month","VPS server included","Google Sheets + Gmail integration","Multi-language support","Smart fallback & escalation rules"] },
-      { name:"Growth Suite", tier:"Pro", price:"$126", per:"/mo", setup:"$194", setupNote:"One-Time Setup Fee", year:"~$1,511/year", features:["Everything in Standard","Instagram DM automation","Facebook Messenger integration","Unified multi-platform inbox log","1,000 conv/platform (3,000 total)","AI-powered CV analyzer","Best-match candidate filter","Monthly performance report","Priority support"] },
+      { name:"Lead Magnet", tier:"Basic", price:"$59", per:"/mo", setup:"$109", setupNote:"One-Time Setup Fee", year:"~$708/year", features:["WhatsApp lead qualification bot","Pakistan vs international detection","Meta developer account setup","VPS server included","2 auto follow-ups (4h + 22h)","Google Sheets lead logging","Gmail notification per lead","1,000 conversations / month","Fallback + escalation logic"] },
+      { name:"Smart Assistant", tier:"Standard", featured:true, price:"$109", per:"/mo", setup:"$179", setupNote:"One-Time Setup Fee", year:"~$1,308/year", features:["Everything in Basic","Hiring flow (6 role-specific forms)","Voice note transcription (Whisper AI)","2-hour hiring follow-up automation","5,000 conversations / month","VPS server included","Google Sheets + Gmail integration","Multi-language support","Smart fallback & escalation rules"] },
+      { name:"Growth Suite", tier:"Pro", price:"$179", per:"/mo", setup:"$269", setupNote:"One-Time Setup Fee", year:"~$2,148/year", features:["Everything in Standard","Instagram DM automation","Facebook Messenger integration","Unified multi-platform inbox log","1,000 conv/platform (3,000 total)","AI-powered CV analyzer","Best-match candidate filter","Monthly performance report","Priority support"] },
     ]},
   { id:"webdev", icon:"🌐", label:"Website Development", tagline:"Custom websites that convert visitors into clients",
     desc:"Fast, mobile-responsive, SEO-optimized websites. From landing pages to full e-commerce stores.", type:"web",
     packages:[
-      { name:"Starter", tier:"Basic", price:"$36", per:"/project", year:"❌ Domain & Hosting NOT included · ➕ Optional Add-on: +$36", service:["4–6 page service-based website","CTA: WhatsApp button only","WhatsApp chatbot included","Query form + Google Map + Reviews"], ecom:["4 pages","10 product listings","WhatsApp button CTA"] },
-      { name:"Standard", tier:"Standard", featured:true, price:"$101", per:"/project", year:"❌ Domain & Hosting NOT included · ➕ Optional Add-on: +$36", service:["4–10 page website","Appointment booking system","WhatsApp chatbot included","Google Map & Reviews integration","Mobile responsive"], ecom:["4–10 pages, 20 products, 5 categories","Add-to-cart + Cash on Delivery","Payment Gateway: Optional (+$18)"] },
-      { name:"Premium / Pro", tier:"Pro", price:"$187", per:"/project", year:"❌ Domain & Hosting NOT included · ➕ Optional Add-on: +$36", service:["6–15 page fully custom website","Appointment booking + calendar","AI chatbot + Google Sheets CRM","Meta Pixel + Google indexing","Core Web Vitals optimization"], ecom:["6–15 pages, 50 products","Full payment: Stripe, PayPal, QR, Bank","Checkout + inventory + customer accounts"] },
+      { name:"Starter", tier:"Basic", price:"$49", per:"/project", year:"❌ Domain & Hosting NOT included · ➕ Optional Add-on: +$49", service:["4–6 page service-based website","CTA: WhatsApp button only","WhatsApp chatbot included","Query form + Google Map + Reviews"], ecom:["4 pages","10 product listings","WhatsApp button CTA"] },
+      { name:"Standard", tier:"Standard", featured:true, price:"$149", per:"/project", year:"❌ Domain & Hosting NOT included · ➕ Optional Add-on: +$49", service:["4–10 page website","Appointment booking system","WhatsApp chatbot included","Google Map & Reviews integration","Mobile responsive"], ecom:["4–10 pages, 20 products, 5 categories","Add-to-cart + Cash on Delivery","Payment Gateway: Optional (+$25)"] },
+      { name:"Premium / Pro", tier:"Pro", price:"$259", per:"/project", year:"❌ Domain & Hosting NOT included · ➕ Optional Add-on: +$49", service:["6–15 page fully custom website","Appointment booking + calendar","AI chatbot + Google Sheets CRM","Meta Pixel + Google indexing","Core Web Vitals optimization"], ecom:["6–15 pages, 50 products","Full payment: Stripe, PayPal, QR, Bank","Checkout + inventory + customer accounts"] },
     ]},
   { id:"smm", icon:"📱", label:"Social Media Marketing", tagline:"Fixed packages or build your own custom plan", desc:"Choose a ready-made package or customize your own — select platforms, posts, reels, and ad campaigns. Price updates live.", type:"smm" },
   { id:"seo", icon:"🔍", label:"SEO", tagline:"Rank higher on Google and get organic leads daily", desc:"Data-driven SEO — on-page, technical, keywords, backlinks, and monthly reporting.", type:"packages",
     packages:[
-      { name:"Local SEO", tier:"Basic", price:"$54", per:"/mo", year:"~$648/year", features:["10 target keywords","On-page SEO optimization","Google Business Profile setup","Local citation building","Monthly ranking report","Competitor keyword analysis"] },
-      { name:"Growth SEO", tier:"Standard", featured:true, price:"$101", per:"/mo", year:"~$1,209/year", features:["25 target keywords","Full on-page + technical SEO","Backlink building (10/month)","Blog content (2 articles/month)","Core Web Vitals optimization","Monthly SEO audit report"] },
-      { name:"Authority SEO", tier:"Pro", price:"$180", per:"/mo", year:"~$2,158/year", features:["50+ target keywords","Advanced technical SEO","Backlink building (25/month)","Blog content (4 articles/month)","Weekly ranking updates","Dedicated SEO strategist"] },
+      { name:"Local SEO", tier:"Basic", price:"$75", per:"/mo", year:"~$900/year", features:["10 target keywords","On-page SEO optimization","Google Business Profile setup","Local citation building","Monthly ranking report","Competitor keyword analysis"] },
+      { name:"Growth SEO", tier:"Standard", featured:true, price:"$139", per:"/mo", year:"~$1,668/year", features:["25 target keywords","Full on-page + technical SEO","Backlink building (10/month)","Blog content (2 articles/month)","Core Web Vitals optimization","Monthly SEO audit report"] },
+      { name:"Authority SEO", tier:"Pro", price:"$249", per:"/mo", year:"~$2,988/year", features:["50+ target keywords","Advanced technical SEO","Backlink building (25/month)","Blog content (4 articles/month)","Weekly ranking updates","Dedicated SEO strategist"] },
     ]},
   { id:"googleads", icon:"📢", label:"Google Ads", tagline:"Paid ads that bring paying customers, not just clicks", desc:"High-converting Google Ads — Search, Display, Remarketing — optimized for maximum ROI.", type:"packages",
     packages:[
-      { name:"Launch Ads", tier:"Basic", price:"$54", per:"/mo", year:"+ your ad budget", features:["Google Search Ads setup","Up to 2 ad campaigns","Keyword research & bidding","Ad copywriting","Conversion tracking setup","Monthly performance report"] },
-      { name:"Scale Ads", tier:"Standard", featured:true, price:"$90", per:"/mo", year:"+ your ad budget", features:["Search + Display campaigns","Up to 5 ad campaigns","A/B ad copy testing","Remarketing / retargeting","Bi-weekly optimization","Monthly ROI report"] },
-      { name:"Full Funnel Ads", tier:"Pro", price:"$144", per:"/mo", year:"+ your ad budget", features:["Search + Display + Shopping","Unlimited campaigns","YouTube video ads","Smart bidding strategies","Custom reporting dashboard","Dedicated ads manager"] },
+      { name:"Launch Ads", tier:"Basic", price:"$79", per:"/mo", year:"+ your ad budget", features:["Google Search Ads setup","Up to 2 ad campaigns","Keyword research & bidding","Ad copywriting","Conversion tracking setup","Monthly performance report"] },
+      { name:"Scale Ads", tier:"Standard", featured:true, price:"$125", per:"/mo", year:"+ your ad budget", features:["Search + Display campaigns","Up to 5 ad campaigns","A/B ad copy testing","Remarketing / retargeting","Bi-weekly optimization","Monthly ROI report"] },
+      { name:"Full Funnel Ads", tier:"Pro", price:"$199", per:"/mo", year:"+ your ad budget", features:["Search + Display + Shopping","Unlimited campaigns","YouTube video ads","Smart bidding strategies","Custom reporting dashboard","Dedicated ads manager"] },
     ]},
   { id:"growth", icon:"🚀", label:"Growth Combo", tagline:"Pick any 2–3 services and save up to 25%", desc:"Mix and match any services — Website, SEO, Social Media, Chatbot, Ads, Leads and more. Select your tier for each and get an instant bundled price.", type:"combo" },
   { id:"calling", icon:"📞", label:"Calling Agent", tagline:"AI voice calling agent for lead follow-up & outreach", desc:"AI-powered calling — follow-ups, qualifying, confirming appointments — all automated.", type:"packages",
     packages:[
-      { name:"Basic Caller", tier:"Basic", price:"$65", per:"/mo", setup:"$72", setupNote:"One-Time Setup Fee", year:"~$777/year", features:["AI outbound calling setup","500 calls per month","Lead follow-up automation","Call outcome logging","Gmail summary per call","n8n workflow included"] },
-      { name:"Smart Caller", tier:"Standard", featured:true, price:"$108", per:"/mo", setup:"$126", setupNote:"One-Time Setup Fee", year:"~$1,295/year", features:["Everything in Basic","1,500 calls per month","Inbound + outbound calling","Appointment booking via call","CRM / Sheets integration","Call transcript logging"] },
-      { name:"Enterprise Caller", tier:"Pro", price:"$180", per:"/mo", setup:"$198", setupNote:"One-Time Setup Fee", year:"~$2,158/year", features:["Everything in Standard","Unlimited calls","Multi-language support","WhatsApp + Call combined flow","A/B script testing","Monthly performance report"] },
+      { name:"Basic Caller", tier:"Basic", price:"$89", per:"/mo", setup:"$99", setupNote:"One-Time Setup Fee", year:"~$1,068/year", features:["AI outbound calling setup","500 calls per month","Lead follow-up automation","Call outcome logging","Gmail summary per call","n8n workflow included"] },
+      { name:"Smart Caller", tier:"Standard", featured:true, price:"$149", per:"/mo", setup:"$179", setupNote:"One-Time Setup Fee", year:"~$1,788/year", features:["Everything in Basic","1,500 calls per month","Inbound + outbound calling","Appointment booking via call","CRM / Sheets integration","Call transcript logging"] },
+      { name:"Enterprise Caller", tier:"Pro", price:"$249", per:"/mo", setup:"$279", setupNote:"One-Time Setup Fee", year:"~$2,988/year", features:["Everything in Standard","Unlimited calls","Multi-language support","WhatsApp + Call combined flow","A/B script testing","Monthly performance report"] },
     ]},
   { id:"leadgen", icon:"🎯", label:"Lead Generation", tagline:"Targeted lead lists and B2B outreach", desc:"Verified leads via data scraping, LinkedIn outreach, cold email, and WhatsApp campaigns.", type:"leadgen",
     packages:[
-      { name:"Starter Leads", tier:"Basic", price:"$72", per:"/mo", year:"~$863/year", features:["100 verified leads/month","Target by industry & location","Name, email, phone included","Google Sheet delivery","Basic email outreach (50/month)","Monthly lead report"] },
-      { name:"Growth Leads", tier:"Standard", featured:true, price:"$126", per:"/mo", year:"~$1,511/year", features:["300 verified leads/month","Cold email sequence (3-step)","WhatsApp outreach automation","LinkedIn connection campaign","Lead scoring & prioritization","Monthly conversion report"] },
-      { name:"Enterprise Leads", tier:"Pro", price:"$216", per:"/mo", year:"~$2,590/year", features:["700+ verified leads/month","Multi-channel outreach","WhatsApp + LinkedIn + Cold call","Lead nurturing automation","A/B tested messaging","Dedicated lead strategist"] },
+      { name:"Starter Leads", tier:"Basic", price:"$99", per:"/mo", year:"~$1,188/year", features:["100 verified leads/month","Target by industry & location","Name, email, phone included","Google Sheet delivery","Basic email outreach (50/month)","Monthly lead report"] },
+      { name:"Growth Leads", tier:"Standard", featured:true, price:"$179", per:"/mo", year:"~$2,148/year", features:["300 verified leads/month","Cold email sequence (3-step)","WhatsApp outreach automation","LinkedIn connection campaign","Lead scoring & prioritization","Monthly conversion report"] },
+      { name:"Enterprise Leads", tier:"Pro", price:"$299", per:"/mo", year:"~$3,588/year", features:["700+ verified leads/month","Multi-channel outreach","WhatsApp + LinkedIn + Cold call","Lead nurturing automation","A/B tested messaging","Dedicated lead strategist"] },
     ]},
   { id:"video", icon:"🎬", label:"AI Video Creation", tagline:"AI-generated or edited videos — build your package", desc:"Choose AI commercial videos or reel editing. Mix both and see your monthly price live.", type:"video" },
 ];
