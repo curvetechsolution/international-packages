@@ -184,7 +184,7 @@ function GSModal({ open, onClose, name, price, serviceId = "", skipDuration = fa
   const msg = name ? `Hi! I'm interested in the *${name}* package${price ? ` (${price})` : ""}${selectedDur ? ` — Delivery: *${selectedDur}*` : ""}. Please share more details.` : "";
 
 const handleInvoiceRequest = async () => {
-    if (!form.name || !form.email || !form.phone) return;
+    if (!form.name || !form.phone) return;
     setLoading(true);
     setError("");
     try {
@@ -380,7 +380,7 @@ const handleInvoiceRequest = async () => {
                 style={inputStyle}
               />
               <input
-                placeholder="Email Address *"
+                placeholder="Email Address (Optional)"
                 type="email"
                 value={form.email}
                 onChange={e=>setForm({...form, email:e.target.value})}
