@@ -984,7 +984,7 @@ function SMMService({ color }) {
       warning:["Boosting Budget: $108–180 (Client Paid)"] },
   ];
 
-  const togPlat = id => setPlats(p => p.includes(id) ? p.length>1 ? p.filter(x=>x!==id) : p : [...p,id]);
+const togPlat = id => setPlats(p => p.includes(id) ? p.filter(x=>x!==id) : [...p,id]);
 
   const showStickySmm = mode === "custom";
   return (
