@@ -24,35 +24,38 @@ const svcColor = id => ({ chatbot:B.s, webdev:B.m, smm:B.s, seo:B.d, googleads:B
 const GlobalStyles = () => (
   <style>{`
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Inter, system-ui, sans-serif; background: #f8fafc; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body { font-family: Inter, system-ui, sans-serif; background: #f8fafc; overflow-x: hidden; width: 100%; }
+    html, body, #root { overflow-x: hidden; max-width: 100vw; }
     img { max-width: 100%; display: block; }
     button { font-family: inherit; }
     a { font-family: inherit; }
+    input, select, textarea { font-size: 16px; }
 
     .topbar { background: linear-gradient(90deg,${B.d},${B.s}); text-align:center; padding:6px 16px; font-size:12px; font-weight:500; color:#fff; }
     .topbar a { color:#fff; font-weight:700; text-decoration:underline; }
 
-    .navbar { background:#fff; border-bottom:1px solid #e8edf2; padding:6px 20px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 10px rgba(0,0,0,.04); position:sticky; top:0; z-index:200; }
-    .navbar-logo { height:44px; object-fit:contain; }
+    .navbar { background:#fff; border-bottom:1px solid #e8edf2; padding:6px 20px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 10px rgba(0,0,0,.04); position:sticky; top:0; z-index:200; gap:8px; }
+    .navbar-logo { height:44px; object-fit:contain; max-width:40vw; }
     .navbar-actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
     .btn-meeting { background:${B.p}; color:${B.m}; border:1.5px solid ${B.mid}; border-radius:10px; padding:8px 14px; font-weight:700; font-size:13px; text-decoration:none; white-space:nowrap; }
     .btn-wa { background:#25d366; color:#fff; border-radius:10px; padding:9px 16px; font-weight:700; font-size:13px; text-decoration:none; white-space:nowrap; box-shadow:0 4px 14px rgba(37,211,102,.3); }
 
-    .hero { text-align:center; padding:14px 20px 12px; background:linear-gradient(180deg,${B.l} 0%,#f8fafc 100%); }
-    .hero h1 { font-size:clamp(16px,2.8vw,24px); font-weight:900; color:#0f172a; margin-bottom:6px; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    .hero p { color:#64748b; font-size:12px; max-width:500px; margin:0 auto; line-height:1.5; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .hero { text-align:center; padding:14px 16px 12px; background:linear-gradient(180deg,${B.l} 0%,#f8fafc 100%); }
+    .hero h1 { font-size:clamp(18px,5.5vw,24px); font-weight:900; color:#0f172a; margin-bottom:6px; line-height:1.3; overflow-wrap:break-word; }
+    .hero p { color:#64748b; font-size:clamp(12px,3.2vw,14px); max-width:500px; margin:0 auto; line-height:1.5; overflow-wrap:break-word; }
     .badge-pill { display:inline-block; background:linear-gradient(90deg,${B.d},${B.s}); color:#fff; font-size:10px; font-weight:700; padding:3px 12px; border-radius:99px; margin-bottom:8px; letter-spacing:.08em; text-transform:uppercase; box-shadow:0 3px 10px ${B.s}40; }
 
     .svc-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; }
-    .svc-card { background:#fff; border:1.5px solid #e8edf2; border-radius:14px; padding:16px 14px 14px; cursor:pointer; text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(0,0,0,.04); transition:all .25s cubic-bezier(.4,0,.2,1); height:100%; }
+    .svc-card { background:#fff; border:1.5px solid #e8edf2; border-radius:14px; padding:16px 14px 14px; cursor:pointer; text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(0,0,0,.04); transition:all .25s cubic-bezier(.4,0,.2,1); height:100%; min-width:0; }
     .svc-card:hover { border-color:${B.s}; transform:translateY(-3px); box-shadow:0 8px 22px ${B.s}22; }
     .svc-icon { width:44px; height:44px; border-radius:12px; background:${B.l}; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 auto; }
-    .svc-label { font-weight:800; font-size:13px; color:#0f172a; line-height:1.3; }
+    .svc-label { font-weight:800; font-size:13px; color:#0f172a; line-height:1.3; overflow-wrap:break-word; }
     .svc-tagline { font-size:11px; color:#64748b; line-height:1.4; flex:1; }
     .svc-cta { background:${B.l}; color:${B.m}; font-size:10px; font-weight:700; padding:4px 12px; border-radius:99px; margin-top:auto; }
 
     .pkg-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px; }
-    .pkg-card { background:#fff; border-radius:16px; padding:1.1rem 1rem; display:flex; flex-direction:column; position:relative; transition:transform .25s,box-shadow .25s; }
+    .pkg-card { background:#fff; border-radius:16px; padding:1.1rem 1rem; display:flex; flex-direction:column; position:relative; transition:transform .25s,box-shadow .25s; min-width:0; }
     .pkg-card:hover { transform:translateY(-3px); }
 
     .trust-bar { display:flex; flex-wrap:wrap; justify-content:center; gap:6px 14px; color:#94a3b8; font-size:11px; margin-bottom:10px; }
@@ -63,7 +66,7 @@ const GlobalStyles = () => (
     .cta-btn-wa { display:inline-block; background:#25d366; color:#fff; border-radius:12px; padding:11px 22px; font-weight:700; font-size:14px; text-decoration:none; box-shadow:0 6px 18px rgba(37,211,102,.3); }
     .cta-btn-cal { display:inline-block; background:linear-gradient(90deg,${B.s},${B.m}); color:#fff; border-radius:12px; padding:11px 22px; font-weight:700; font-size:14px; text-decoration:none; box-shadow:0 6px 18px ${B.s}40; }
 
-    .detail-nav { background:#fff; border-bottom:1px solid #e8edf2; padding:10px 16px; display:flex; align-items:center; gap:8px; position:sticky; top:0; z-index:100; box-shadow:0 2px 10px rgba(0,0,0,.05); flex-wrap:wrap; }
+    .detail-nav { background:#fff; border-bottom:1px solid #e8edf2; padding:10px 12px; display:flex; align-items:center; gap:8px; position:sticky; top:0; z-index:100; box-shadow:0 2px 10px rgba(0,0,0,.05); flex-wrap:wrap; }
     .detail-nav-title { font-weight:800; font-size:15px; color:#0f172a; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
     .footer { background:#0c4a6e; color:#fff; padding:28px 20px; text-align:center; }
@@ -78,13 +81,13 @@ const GlobalStyles = () => (
     .video-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px,100%), 1fr)); gap:20px; margin-bottom:24px; }
 
     @media (max-width: 640px) {
-      .navbar { padding:8px 12px; }
-      .navbar-logo { height:44px; }
+      .navbar { padding:8px 10px; }
+      .navbar-logo { height:38px; }
       .btn-meeting { display:none; }
       .btn-wa { padding:8px 12px; font-size:12px; }
       .svc-grid { grid-template-columns:repeat(2, 1fr); gap:10px; }
-      .svc-card { padding:16px 8px; gap:6px; }
-      .svc-icon { width:40px; height:40px; font-size:20px; }
+      .svc-card { padding:14px 6px; gap:6px; }
+      .svc-icon { width:38px; height:38px; font-size:19px; }
       .svc-label { font-size:12px; }
       .svc-tagline { display:none; }
       .pkg-grid { grid-template-columns:1fr; gap:10px; }
@@ -92,14 +95,20 @@ const GlobalStyles = () => (
       .custom-builder { grid-template-columns:1fr; }
       .summary-sticky { position:static; }
       .cta-btn-wa, .cta-btn-cal { font-size:13px; padding:10px 16px; width:100%; text-align:center; }
-      .detail-nav { gap:6px; }
+      .detail-nav { gap:6px; padding:8px 10px; }
       .detail-nav-title { font-size:13px; }
       .trust-bar { gap:8px 14px; font-size:11px; }
+      .hero { padding:12px 12px 10px; }
     }
 
     @media (max-width: 400px) {
       .svc-grid { grid-template-columns:repeat(2, 1fr); }
-      .topbar { font-size:11px; padding:7px 10px; }
+      .topbar { font-size:10px; padding:6px 8px; }
+      .navbar { padding:6px 8px; }
+      .navbar-logo { height:32px; }
+      .btn-wa { padding:7px 10px; font-size:11px; }
+      .detail-nav { padding:7px 8px; gap:5px; }
+      .detail-nav-title { font-size:12px; }
     }
 
     @media (min-width: 641px) and (max-width: 900px) {
@@ -124,6 +133,11 @@ const GlobalStyles = () => (
     .wa-float svg { width:34px; height:34px; fill:#fff; }
     @keyframes waPulse { 0%,100%{box-shadow:0 6px 24px rgba(37,211,102,.5),0 0 0 0 rgba(37,211,102,.4)} 60%{box-shadow:0 6px 24px rgba(37,211,102,.5),0 0 0 14px rgba(37,211,102,0)} }
 
+    @media (max-width: 640px) {
+      .wa-float { width:52px; height:52px; bottom:16px; right:14px; }
+      .wa-float svg { width:28px; height:28px; }
+    }
+
     .builder-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; margin-bottom:20px; }
     .builder-grid-2 { display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; margin-bottom:20px; }
     .web-feat-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; }
@@ -135,6 +149,13 @@ const GlobalStyles = () => (
       .builder-grid { grid-template-columns:1fr; }
       .builder-grid-2 { grid-template-columns:1fr; }
       .web-feat-grid { grid-template-columns:1fr; }
+    }
+
+    .sticky-bar-inner { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; }
+    @media (max-width: 480px) {
+      .sticky-bar-inner { padding:10px 12px; gap:8px; }
+      .sticky-bar-inner .sb-price { font-size:18px !important; }
+      .sticky-bar-inner .sb-btn { padding:11px 16px !important; font-size:13px !important; }
     }
   `}</style>
 );
@@ -272,7 +293,7 @@ const handleInvoiceRequest = async () => {
 
   const inputStyle: React.CSSProperties = {
     width:"100%", padding:"11px 14px",
-    border:"1.5px solid #e2e8f0", borderRadius:10, fontSize:14,
+    border:"1.5px solid #e2e8f0", borderRadius:10, fontSize:16,
     fontFamily:"inherit", boxSizing:"border-box" as const,
     outline:"none", transition:"border .2s",
     marginBottom:10,
@@ -500,22 +521,22 @@ function StickyBar({ price, label = "Get Started →", onClick, color, visible =
       position:"fixed", bottom:0, left:0, right:0, zIndex:8000,
       background:"#fff", borderTop:`2px solid ${color}30`,
       boxShadow:"0 -4px 24px rgba(0,0,0,0.10)",
-      padding:"12px 16px",
-      display:"flex", alignItems:"center", justifyContent:"space-between", gap:12,
     }}>
-      <div>
-        <div style={{ fontSize:11, color:"#94a3b8", fontWeight:600 }}>Your Package Total</div>
-        <div style={{ fontSize:22, fontWeight:900, color, lineHeight:1 }}>{price}</div>
+      <div className="sticky-bar-inner">
+        <div style={{ minWidth:0 }}>
+          <div style={{ fontSize:11, color:"#94a3b8", fontWeight:600 }}>Your Package Total</div>
+          <div className="sb-price" style={{ fontSize:22, fontWeight:900, color, lineHeight:1, overflowWrap:"break-word" }}>{price}</div>
+        </div>
+        <button className="sb-btn" onClick={onClick} style={{
+          background:`linear-gradient(90deg,${color},${color}cc)`,
+          color:"#fff", border:"none", borderRadius:12,
+          padding:"13px 28px", fontSize:15, fontWeight:700,
+          cursor:"pointer", boxShadow:`0 4px 16px ${color}40`,
+          whiteSpace:"nowrap", flexShrink:0,
+        }}>
+          {label}
+        </button>
       </div>
-      <button onClick={onClick} style={{
-        background:`linear-gradient(90deg,${color},${color}cc)`,
-        color:"#fff", border:"none", borderRadius:12,
-        padding:"13px 28px", fontSize:15, fontWeight:700,
-        cursor:"pointer", boxShadow:`0 4px 16px ${color}40`,
-        whiteSpace:"nowrap", flexShrink:0,
-      }}>
-        {label}
-      </button>
     </div>,
     document.body
   );
@@ -1627,6 +1648,16 @@ export default function App() {
   };
 
   useEffect(() => {
+    // Ensure the page has a proper mobile viewport with pinch-zoom disabled
+    // so content always fits the screen without the browser auto-zooming in.
+    let meta = document.querySelector('meta[name="viewport"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "viewport";
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute("content", "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover");
+
     setTimeout(() => setVis(true), 60);
     const hash = window.location.hash.replace("#","");
     if (hash && SERVICES.find(s => s.id===hash)) setActive(hash);
