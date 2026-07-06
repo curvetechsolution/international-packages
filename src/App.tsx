@@ -23,14 +23,18 @@ const svcColor = id => ({ chatbot:B.s, webdev:B.m, smm:B.s, seo:B.d, googleads:B
 // ── Global Styles ─────────────────────────────────────────────────
 const GlobalStyles = () => (
   <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800;900&display=swap');
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-    body { font-family: Inter, system-ui, sans-serif; background: #f8fafc; overflow-x: hidden; width: 100%; }
+    body { font-family: 'Plus Jakarta Sans', Inter, system-ui, sans-serif; background: #f8fafc; overflow-x: hidden; width: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; letter-spacing: -0.011em; }
     html, body, #root { overflow-x: hidden; max-width: 100vw; }
     img { max-width: 100%; display: block; }
     button { font-family: inherit; }
     a { font-family: inherit; }
-    input, select, textarea { font-size: 16px; }
+    input, select, textarea { font-size: 16px; font-family: inherit; }
+
+    h1, h2, h3, .navbar-logo-text { font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing: -0.02em; }
 
     .topbar { background: linear-gradient(90deg,${B.d},${B.s}); text-align:center; padding:6px 16px; font-size:12px; font-weight:500; color:#fff; }
     .topbar a { color:#fff; font-weight:700; text-decoration:underline; }
@@ -50,7 +54,7 @@ const GlobalStyles = () => (
     .svc-card { background:#fff; border:1.5px solid #e8edf2; border-radius:14px; padding:16px 14px 14px; cursor:pointer; text-align:center; display:flex; flex-direction:column; align-items:center; gap:6px; box-shadow:0 2px 6px rgba(0,0,0,.04); transition:all .25s cubic-bezier(.4,0,.2,1); height:100%; min-width:0; }
     .svc-card:hover { border-color:${B.s}; transform:translateY(-3px); box-shadow:0 8px 22px ${B.s}22; }
     .svc-icon { width:44px; height:44px; border-radius:12px; background:${B.l}; display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 auto; }
-    .svc-label { font-weight:800; font-size:13px; color:#0f172a; line-height:1.3; overflow-wrap:break-word; }
+    .svc-label { font-family:'Sora','Plus Jakarta Sans',system-ui,sans-serif; font-weight:800; font-size:13px; color:#0f172a; line-height:1.3; overflow-wrap:break-word; }
     .svc-tagline { font-size:11px; color:#64748b; line-height:1.4; flex:1; }
     .svc-cta { background:${B.l}; color:${B.m}; font-size:10px; font-weight:700; padding:4px 12px; border-radius:99px; margin-top:auto; }
 
@@ -67,7 +71,7 @@ const GlobalStyles = () => (
     .cta-btn-cal { display:inline-block; background:linear-gradient(90deg,${B.s},${B.m}); color:#fff; border-radius:12px; padding:11px 22px; font-weight:700; font-size:14px; text-decoration:none; box-shadow:0 6px 18px ${B.s}40; }
 
     .detail-nav { background:#fff; border-bottom:1px solid #e8edf2; padding:10px 12px; display:flex; align-items:center; gap:8px; position:sticky; top:0; z-index:100; box-shadow:0 2px 10px rgba(0,0,0,.05); flex-wrap:wrap; }
-    .detail-nav-title { font-weight:800; font-size:15px; color:#0f172a; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .detail-nav-title { font-family:'Sora','Plus Jakarta Sans',system-ui,sans-serif; font-weight:800; font-size:15px; color:#0f172a; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
     .footer { background:#0c4a6e; color:#fff; padding:28px 20px; text-align:center; }
     .footer-links { display:flex; flex-wrap:wrap; justify-content:center; gap:12px 16px; font-size:12px; color:#7dd3fc; }
