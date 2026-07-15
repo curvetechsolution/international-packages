@@ -1513,6 +1513,11 @@ const SERVICES = [
       { name:"Starter", tier:"Basic", price:"$299", per:"/project", year:"❌ Domain & Hosting NOT included · ➕ Optional Add-on: +$150", service:["4–6 page service-based website","CTA: WhatsApp button only","WhatsApp chatbot included","Query form + Google Map + Reviews"], ecom:["4 pages","10 product listings","WhatsApp button CTA"] },
       { name:"Standard", tier:"Standard", featured:true, price:"$599", per:"/project", year:"❌ Domain & Hosting NOT included · ➕ Optional Add-on: +$150", service:["4–10 page website","Appointment booking system","WhatsApp chatbot included","Google Map & Reviews integration","Mobile responsive"], ecom:["4–10 pages, 20 products, 5 categories","Add-to-cart + Cash on Delivery","Payment Gateway: Optional (+$150)"] },
       { name:"Premium / Pro", tier:"Pro", price:"$999", per:"/project", year:"❌ Domain & Hosting NOT included · ➕ Optional Add-on: +$150", service:["6–15 page fully custom website","Appointment booking + calendar","AI chatbot + Google Sheets CRM","Meta Pixel + Google indexing","Core Web Vitals optimization"], ecom:["6–15 pages, 50 products","Full payment: Stripe, PayPal, QR, Bank","Checkout + inventory + customer accounts"] },
+    ],
+    maintenance:[
+      { name:"Basic Care", tier:"Basic", price:"$25", per:"/mo", year:"~$300/year", features:["Uptime & error monitoring","Security & software updates","Monthly backup","Bug fixes (up to 2 hrs/month)","Email support (48-hr response)"] },
+      { name:"Standard Care", tier:"Standard", featured:true, price:"$45", per:"/mo", year:"~$540/year", features:["Everything in Basic Care","Content updates (up to 4/month)","Priority support (24-hr response)","Bug fixes (up to 5 hrs/month)","Weekly backup + monthly health report"] },
+      { name:"Pro Care", tier:"Pro", price:"$75", per:"/mo", year:"~$900/year", features:["Everything in Standard Care","Unlimited content updates","Dedicated support (same-day response)","Unlimited bug fixes","Performance & SEO health checks","Monthly management report"] },
     ]},
   { id:"smm", icon:"📱", label:"Social Media Marketing", tagline:"Fixed packages or build your own custom plan", desc:"Choose a ready-made package or customize your own — select platforms, posts, reels, and ad campaigns. Price updates live.", type:"smm" },
   { id:"seo", icon:"🔍", label:"SEO", tagline:"Rank higher on Google and get organic leads daily", desc:"Data-driven SEO — on-page, technical, keywords, backlinks, and monthly reporting.", type:"packages",
@@ -1606,7 +1611,24 @@ function ServiceDetail({ svc, onBack, onOther }) {
           {svc.type === "smm" && <SMMService color={color} />}
           {svc.type === "video" && <VideoService color={color} />}
           {svc.type === "leadgen" && <LeadGenService color={color} />}
-          {svc.type === "web" && <WebSection packages={svc.packages} color={color} />}
+          {svc.type === "web" && (
+            <>
+              <WebSection packages={svc.packages} color={color} />
+              {svc.maintenance && (
+                <div style={{ marginTop:16 }}>
+                  <div style={{ textAlign:"center", marginBottom:16 }}>
+                    <h2 style={{ fontSize:17, fontWeight:800, color:"#0f172a", marginBottom:4 }}>🛠 Monthly Maintenance & Support</h2>
+                    <p style={{ color:"#94a3b8", fontSize:12 }}>Keep your website error-free · Ongoing technical support + content management</p>
+                  </div>
+                  <SyncedFeatureGroup color={color}>
+                    <div className="pkg-grid">
+                      {svc.maintenance.map((pkg,i) => <PkgCard key={i} pkg={pkg} color={color} serviceId={svc.id} />)}
+                    </div>
+                  </SyncedFeatureGroup>
+                </div>
+              )}
+            </>
+          )}
           {svc.type === "combo" && <ComboBuilder color={color} />}
           {svc.type === "packages" && (
             <>
