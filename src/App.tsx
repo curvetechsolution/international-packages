@@ -1009,8 +1009,16 @@ function SMMService({ color }) {
       features:["Platforms: Facebook + Instagram","One Optional: LinkedIn or TikTok","12 Posts per month","2 Reels (30–45 sec)","Copywriting & caption hooks","Page management","3 Paid Campaigns (Awareness + Engagement + Retargeting)","Monthly growth report"],
       warning:["Boosting Budget: $54–72 (Client Paid)"] },
     { name:"Brand Authority", tier:"Pro", price:"$899", per:"/month", featured:false,
-      features:["Platforms: Facebook, Instagram, LinkedIn, YouTube","25 Custom Posts per month","4 Reels (30–60 sec with overlays)","Content calendar","Competitor analysis","Bi-weekly growth consultation","4 Campaigns (Includes Conversion + Retargeting)"],
-      warning:["Boosting Budget: $108–180 (Client Paid)"] },
+            features:[
+        "Platforms: Facebook, Instagram, TikTok",
+        "Content Creation",
+        "5 Creative Videos per month",
+        "5 Static Creative Posts per month",
+        "Social Media Pages Optimization",
+        "Monthly Performance Report",
+        "Competitor Analysis",
+        "5 Total Campaigns (4 Meta + 1 TikTok)"
+      ],
   ];
 
 const togPlat = id => setPlats(p => p.includes(id) ? p.filter(x=>x!==id) : [...p,id]);
