@@ -633,9 +633,11 @@ function PkgCard({ pkg, color, serviceId = "" }) {
 }
 
 // ── Web Features (all prices in USD) ───────────────────────────────
+// NOTE: "default" values below are set equal to each field's "min" so the
+// Build-Your-Own-Plan builder always starts at a $0 add-on total.
 const WEB_FEATURES = {
   service: [
-    { key:"pages",      icon:"📄", label:"Number of Pages",        type:"counter", min:1, max:20, default:4, basePrice:25,  unit:"page",  desc:"Each additional page" },
+    { key:"pages",      icon:"📄", label:"Number of Pages",        type:"counter", min:1, max:20, default:1, basePrice:25,  unit:"page",  desc:"Each additional page" },
     { key:"whatsapp",   icon:"💬", label:"WhatsApp Button",         type:"toggle",  price:0,     included:true, desc:"CTA button linking to WhatsApp" },
     { key:"domainhosting", icon:"🌐", label:"Domain & Hosting (1 Year)", type:"toggle", price:150, desc:"Custom domain + hosting setup, 1 year" },
     { key:"chatbot",    icon:"🤖", label:"WhatsApp Chatbot",         type:"toggle",  price:150,  desc:"Automated WhatsApp reply bot" },
@@ -652,9 +654,9 @@ const WEB_FEATURES = {
     { key:"mobile",     icon:"📱", label:"Mobile Responsive",        type:"toggle",  price:0,     included:true, desc:"Works on all screen sizes" },
   ],
   ecom: [
-    { key:"pages",      icon:"📄", label:"Number of Pages",          type:"counter", min:1, max:20, default:4, basePrice:25,  unit:"page",  desc:"Each page beyond 1st" },
-    { key:"products",   icon:"🛍️", label:"Product Listings",          type:"counter", min:5, max:100, default:10, basePrice:5, unit:"product", desc:"Per product listing" },
-    { key:"categories", icon:"🗂️", label:"Product Categories",        type:"counter", min:1, max:20, default:3, basePrice:30,  unit:"cat",   desc:"Per product category" },
+    { key:"pages",      icon:"📄", label:"Number of Pages",          type:"counter", min:1, max:20, default:1, basePrice:25,  unit:"page",  desc:"Each page beyond 1st" },
+    { key:"products",   icon:"🛍️", label:"Product Listings",          type:"counter", min:5, max:100, default:5, basePrice:5, unit:"product", desc:"Per product listing" },
+    { key:"categories", icon:"🗂️", label:"Product Categories",        type:"counter", min:1, max:20, default:1, basePrice:30,  unit:"cat",   desc:"Per product category" },
     { key:"whatsapp",   icon:"💬", label:"WhatsApp Button",           type:"toggle",  price:0,     included:true, desc:"CTA button linking to WhatsApp" },
     { key:"domainhosting", icon:"🌐", label:"Domain & Hosting (1 Year)", type:"toggle", price:150, desc:"Custom domain + hosting setup, 1 year" },
     { key:"cart",       icon:"🛒", label:"Add to Cart + COD",         type:"toggle",  price:150,  desc:"Cart system with cash on delivery" },
@@ -668,7 +670,8 @@ const WEB_FEATURES = {
   ]
 };
 
-const BASE_PRICE = { service: 299, ecom: 299 };
+// Base price starts at $0 — total is purely driven by the features the user picks.
+const BASE_PRICE = { service: 0, ecom: 0 };
 
 function WebPlanChooser({ color }) {
   const [gsOpen, setGsOpen] = useState(false);
@@ -973,8 +976,9 @@ const PLATS_DEF = [
 
 function SMMService({ color }) {
   const [mode, setMode] = useState("packages");
-  const [plats, setPlats] = useState(["fb","ig"]);
-  const [posts, setPosts] = useState(8);
+  // Custom builder starts empty ($0) — user selects platforms/posts themselves.
+  const [plats, setPlats] = useState<string[]>([]);
+  const [posts, setPosts] = useState(0);
   const [aiReels, setAiReels] = useState(0);
   const [edReels, setEdReels] = useState(0);
   const [aiReelDur, setAiReelDur] = useState(30);
@@ -983,10 +987,10 @@ function SMMService({ color }) {
   const [ttAds, setTtAds] = useState(0);
   const [liAds, setLiAds] = useState(0);
   const [ytAds, setYtAds] = useState(0);
-  const [fbBudget, setFbBudget] = useState(18);
-  const [ttBudget, setTtBudget] = useState(18);
-  const [liBudget, setLiBudget] = useState(18);
-  const [ytBudget, setYtBudget] = useState(18);
+  const [fbBudget, setFbBudget] = useState(0);
+  const [ttBudget, setTtBudget] = useState(0);
+  const [liBudget, setLiBudget] = useState(0);
+  const [ytBudget, setYtBudget] = useState(0);
   const [gsOpen, setGsOpen] = useState(false);
   const [gsPkg, setGsPkg] = useState(null);
 
@@ -1116,7 +1120,7 @@ const togPlat = id => setPlats(p => p.includes(id) ? p.filter(x=>x!==id) : [...p
             </div>
             <div style={{ background:"#fff", border:"1.5px solid #e8edf2", borderRadius:16, padding:"1.2rem" }}>
               <div style={{ fontWeight:700, fontSize:14, color:"#0f172a", marginBottom:4 }}>💰 Advertisement Budget <span style={{ fontSize:11, color:"#94a3b8", fontWeight:400 }}>— per platform (client paid)</span></div>
-              <p style={{ fontSize:12, color:"#94a3b8", marginBottom:12 }}>Set how much budget your ads will run on. Min: $7 · Max: $1,798</p>
+              <p style={{ fontSize:12, color:"#94a3b8", marginBottom:12 }}>Set how much budget your ads will run on. Min: $0 · Max: $1,798</p>
               <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
                 {[
                   {label:"📘 Facebook Ads", v:fbBudget, set:setFbBudget},
@@ -1129,10 +1133,10 @@ const togPlat = id => setPlats(p => p.includes(id) ? p.filter(x=>x!==id) : [...p
                       <span style={{ fontSize:13, fontWeight:600, color:"#0f172a" }}>{b.label}</span>
                       <span style={{ fontSize:14, fontWeight:800, color }}>{fmtUSD(b.v)}</span>
                     </div>
-                    <input type="range" min={7} max={1798} step={5} value={b.v} onChange={e=>b.set(Number(e.target.value))}
+                    <input type="range" min={0} max={1798} step={5} value={b.v} onChange={e=>b.set(Number(e.target.value))}
                       style={{ width:"100%", accentColor:color, height:6, borderRadius:3, cursor:"pointer" }} />
                     <div style={{ display:"flex", justifyContent:"space-between", fontSize:10, color:"#94a3b8", marginTop:4 }}>
-                      <span>$7</span><span>$1,798</span>
+                      <span>$0</span><span>$1,798</span>
                     </div>
                   </div>
                 ))}
@@ -1154,7 +1158,7 @@ const togPlat = id => setPlats(p => p.includes(id) ? p.filter(x=>x!==id) : [...p
             <div style={{ borderTop:`1.5px dashed ${color}40`, paddingTop:14, marginBottom:16, display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:12 }}>
               <div>
                 <div style={{ fontSize:12, color:"#64748b", fontWeight:600, marginBottom:2 }}>Selected Platforms</div>
-                <div style={{ fontSize:13, fontWeight:700, color:"#0f172a" }}>{plats.map(id=>PLATS_DEF.find(p=>p.id===id)?.label).join(", ")}</div>
+                <div style={{ fontSize:13, fontWeight:700, color:"#0f172a" }}>{plats.length ? plats.map(id=>PLATS_DEF.find(p=>p.id===id)?.label).join(", ") : "None selected"}</div>
               </div>
               <div style={{ textAlign:"right" }}>
                 <div style={{ fontSize:12, color:"#64748b", marginBottom:2 }}>Monthly Total</div>
@@ -1176,7 +1180,8 @@ function LeadGenService({ color }) {
   const [mode, setMode] = useState("packages");
   const [gsOpen, setGsOpen] = useState(false);
   const [gsPkg, setGsPkg] = useState(null);
-  const [leads, setLeads] = useState(100);
+  // Starts at 0 leads — user pulls the slider or taps a quick-select button.
+  const [leads, setLeads] = useState(0);
   const [emailSeq, setEmailSeq] = useState(false);
   const [waOutreach, setWaOutreach] = useState(false);
   const [linkedinCamp, setLinkedinCamp] = useState(false);
@@ -1248,10 +1253,10 @@ function LeadGenService({ color }) {
                 <span style={{ fontSize:20, fontWeight:900, color }}>{leads} leads</span>
                 <span style={{ fontSize:14, fontWeight:700, color:"#0f172a" }}>{fmtUSD(leads*LEAD_P)}/mo</span>
               </div>
-              <input type="range" min={50} max={1000} step={50} value={leads} onChange={e=>setLeads(Number(e.target.value))}
+              <input type="range" min={0} max={1000} step={50} value={leads} onChange={e=>setLeads(Number(e.target.value))}
                 style={{ width:"100%", accentColor:color, height:6, borderRadius:3, cursor:"pointer" }} />
               <div style={{ display:"flex", justifyContent:"space-between", fontSize:10, color:"#94a3b8", marginTop:4 }}>
-                <span>50 leads</span><span>1,000 leads</span>
+                <span>0 leads</span><span>1,000 leads</span>
               </div>
               <div style={{ display:"flex", gap:8, marginTop:10, flexWrap:"wrap" }}>
                 {[100,300,700].map(n=>(
